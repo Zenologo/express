@@ -18,4 +18,16 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    
+    public function getUserTable()
+    {
+        if (!$this->usersTable) {
+            $sm = $this->getServiceLocator();
+            $this->usersTable = $sm->get('Application\Model\UsersTable');
+        }
+        return $this->userTable;
+    }
+    
+    protected $usersTable;
+    
 }
