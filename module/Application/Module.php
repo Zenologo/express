@@ -36,4 +36,24 @@ class Module
             ),
         );
     }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Application\Model\UsersTable' => function ($sm) {
+                    $tableGateway = $sm->get('UsersTableGateway');
+                    $table = new UsersTable($tableGateway);
+                    return $table;
+                },
+                'UserTableGateway' => function ($sm) {
+                    $tableGateway = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Users());
+                    return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),  
+        );
+        
+    }
 }
