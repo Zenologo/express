@@ -6,7 +6,7 @@ class UserForm extends Form
 {
   public function __construct($name = null)
   {
-    parent::__construct('album');
+    parent::__construct('user');
     
     $this->add(array(
       'name'  => 'id',
