@@ -5,6 +5,12 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController
 {
+    protected $loginService;
+    
+    public function __construct(LoginServiceInterface $loginService)
+    {
+        $this->loginService = $loginService;
+    }
 
     public function indexAction()
     {
