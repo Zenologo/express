@@ -22,13 +22,11 @@ return array(
     		),
       ),
       'controllers' => array(
-            'invokables' => array (
+            'factories' => array (
       	         'Login\Controller\Index' => 'Login\Factory\IndexControllerFactory'
             ), 								
-          
-          
-          
     	),
+    	
     'view_manager' => array(
 	   'template_path_stack' => array(
     	   __DIR__ . '/../view',
