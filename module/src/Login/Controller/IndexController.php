@@ -14,7 +14,9 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-    	
+    	return new ViewModel(array(
+    	    'Users' => $this->loginService->findAllUser()
+    	    ));
         
     }
 
