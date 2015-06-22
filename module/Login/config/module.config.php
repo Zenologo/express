@@ -35,12 +35,8 @@ return array(
     
     'service_manager' => array(
     	'invokable' => arrray(
-    		'Login\Service\Indexservicev = 'Index\Service\Interface\' ''	
+    		'Login\Service\IndexserviceInterface' = 'Index\Service\IndexService' 
     	)
-    	
-    	
-    	
-    	
     );   
     }
 );
