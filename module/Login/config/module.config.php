@@ -23,7 +23,7 @@ return array(
       ),
       'controllers' => array(
             'invokables' => array (
-      	         'Login\Controller\Index' => 'Login\Controller\IndexController'
+      	         'Login\Controller\Index' => 'Login\Factory\IndexControllerFactory'
             ), 								
           
           
