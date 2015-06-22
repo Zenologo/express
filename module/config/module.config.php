@@ -34,6 +34,11 @@ return array(
     	   __DIR__ . '/../view',
         ), 
     ),
+    'service_manager' => array(
+    	'invokables' => array(
+    		'Login\Service\IndexServiceInterface' => 'Login\Service\IndexService'		
+    	)
+    ),
     
     
 );
