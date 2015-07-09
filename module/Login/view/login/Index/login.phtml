@@ -1,0 +1,8 @@
+<h1> Login </h1>
+<?php foreach ($this->users as $user): ?>
+<article>
+  <h1 id="user<?= $user->getId() ?>"> <?= $user->getNom()?></h1>
+  <p>
+    <?= $user->getEmail() ?>
+</article>
+<?php endforeach ?>
