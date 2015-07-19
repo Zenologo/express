@@ -1,8 +1,20 @@
-<h1> Login </h1>
+<strong>Module:</strong>        TestView &raquo;
+<strong>Controller:</strong>    Skeleton &raquo;
+<strong>Action:</strong>        index
+
+<!-- list all users -->
+<h1> List users </h1>
+
 <?php foreach ($this->users as $user): ?>
 <article>
-  <h1 id="user<?= $user->getId() ?>"> <?= $user->getNom()?></h1>
-  <p>
-    <?= $user->getEmail() ?>
+    <h1 id = "users<?php echo $user->getId()?>"> <?php echo $user->getNom()?>  </h1>
+    <p>
+        <?php echo $user->getEmail();?>
+    </p>
 </article>
-<?php endforeach ?>
+<?php endforeach;?>
+
+
+
+
+

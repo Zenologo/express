@@ -1,6 +1,7 @@
 <?php
 namespace Login\Model;
 
+
 class User implements UserInterface
 {
     /**
@@ -33,6 +34,14 @@ class User implements UserInterface
      * @var string
      */
     protected $email;
+    
+    
+    protected  $pay;
+    
+    protected $pwd;
+    
+    protected $adresse;
+    
     
     
 	/** (non-PHPdoc)
@@ -114,5 +123,34 @@ class User implements UserInterface
 	}
 
 
+	public function getPay()
+	{
+		return $this->pay;	    
+	}
+	
+	public function setPay($pay)
+	{
+		$this->pay = $pay;
+	}
     
+	public function getAdresse()
+	{
+		return $this->adresse;
+	}
+	
+	public function setAdresse($adresse)
+	{
+		$this->adresse = $adresse;
+	}
+	
+	public function getPwd()
+	{
+		return $this->pwd;
+	}
+	
+	public function setPwd($pwd)
+	{
+		$this->pwd = $pwd;
+	}
+	
 }

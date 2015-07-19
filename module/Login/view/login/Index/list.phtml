@@ -1,0 +1,10 @@
+<h1> Users</h1>
+
+<?php foreach ($this->users as $post): ?> <article>
+<h1 id="testUsers<?= $post->getId() ?>"><?php echo $post->getNom() ?></h1>
+ <p>
+    <?php echo $post->getEmail() ?>
+ </p>
+
+</article>
+<?php endforeach ?>

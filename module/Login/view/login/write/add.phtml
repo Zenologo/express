@@ -1,0 +1,16 @@
+
+<h1> 注册会员 </h1>
+
+<?php 
+echo $this->message . "<p>";
+
+$form = $this->form;
+$form->setAttribute('action', $this->url());
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formcollection($form);
+echo $this->form()->closeTag();
+
+
+?>

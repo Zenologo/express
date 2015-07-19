@@ -1,47 +1,21 @@
 <?php
 namespace Login\Service;
 
-use Login\Model\user;
+use Login\Mapper\UserMapperInterface;
+use Login\Model\UserInterface;
+
 
 class UserService implements UserServiceInterface
 {
-    protected $data = array(
-        array(
-    	   'id' => 1,
-            'nom' => 'YAN1',
-            'prenom' => 'Lei1',
-            'telephone' => '0123456789',
-            'email' => 'yanlei01@yahoo.fr',
-        ),	
-        array(
-    		'id' => 2,
-    		'nom' => 'YAN2',
-    		'prenom' => 'Lei2',
-    		'telephone' => '0123456789',
-    		'email' => 'yanlei02@yahoo.fr',
-        ),        
-        array(
-    		'id' => 3,
-    		'nom' => 'YAN3',
-    		'prenom' => 'Lei3',
-    		'telephone' => '0123456789',
-    		'email' => 'yanlei03@yahoo.fr',
-        ),
-        array(
-    		'id' => 4,
-    		'nom' => 'YAN4',
-    		'prenom' => 'Lei4',
-    		'telephone' => '0123456789',
-    		'email' => 'yanlei04@yahoo.fr',
-        ),
-        array(
-    		'id' => 5,
-    		'nom' => 'YAN5',
-    		'prenom' => 'Lei5',
-    		'telephone' => '0123456789',
-    		'email' => 'yanlei05@yahoo.fr',
-        )
-    );
+    
+    
+    protected $userMapper;
+    
+    public function __construct(UserMapperInterface $userMapper)
+    {
+    	$this->userMapper = $userMapper;   
+    }
+    
     
     
 	/**
@@ -50,12 +24,8 @@ class UserService implements UserServiceInterface
 	 */
     public function findAllUser()
     {
-    	$allUser = array();
-    	foreach ($this->data as $index => $user)
-    	{
-    		$allUser[] = $this->findUser($user);
-    	}
-        return $allUser;
+        echo "UserService, line: " . __LINE__ . "<p>";
+        return $this->userMapper->findAll();
     }
     
     /**
@@ -63,16 +33,23 @@ class UserService implements UserServiceInterface
      * @see \Login\Service\UserServiceInterface::findUser()
      */
     public function findUser($id)
-    {
-        $userData = $this->data[$id];
-        
-        $model = new User();
-        $model->setId($userData['id']);
-        $model->setNom($userData['nom']);
-        $model->setPrenom($userData['prenom']);
-        $model->setEmail($userData['email']);
-        $model->setTelephone($userData['telephone']);
+    {   
+        $result = $this->userMapper->find($id);
+        return  $result;
     }
     
+    public function isDuplicateEmail(UserInterface $user)
+    {
+    	return $this->userMapper->isDuplicateEmail($user);
+    }
     
+	public function saveUser(UserInterface $user)
+	{
+		return $this->userMapper->save($user);
+	} 
+	
+	public function deleteUser(UserInterface $user)
+	{
+		return $this->userMapper->delete($user);
+	}
 }

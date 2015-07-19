@@ -1,0 +1,32 @@
+
+
+
+<?php 
+$form = $this->loginForm;
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<p>
+<table>
+  <tr>
+    <td><?php echo $this->formlabel($form->get('email'));?></td>
+    <td><?php echo $this->formElement($form->get('email')); ?>
+    <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('email'));?></span></td>
+  </tr>
+  <tr>
+    <td><?php echo $this->formlabel($form->get('pwd'));?></td>
+    <td><?php echo $this->formElement($form->get('pwd')); ?>
+    <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('pwd'));?></span></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+    <?php
+        echo $this->formRow($form->get('loginCsrf'));
+        echo $this->formElement($form->get('submit'));
+    ?>
+    </td>
+  </tr>
+</table>
+
+<?php echo $this->form()->closeTag($form)?>

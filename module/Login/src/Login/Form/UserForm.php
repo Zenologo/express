@@ -1,0 +1,31 @@
+<?php
+namespace Login\Form;
+
+use Zend\Form\Form;
+
+class UserForm extends Form
+{
+	public function __construct($name = null, $options = array())
+	{
+	    parent::__construct($name, $options);
+	    
+		$this->add(array(
+			'name' => 'post-fieldset',
+		    'type' => 'Login\Form\UserFieldset',
+		    'options' => array(
+			     'use_as_base_fieldset' => true
+		)
+		));
+		
+		$this->add(array(
+			'type' => 'submit',
+		    'name' => 'submit',
+		    'attributes' => array(
+			'value' => 'Insert new User'
+		)
+		    
+		));
+	    
+	}
+    
+}

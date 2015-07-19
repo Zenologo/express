@@ -1,35 +1,68 @@
 <?php
-namespace Login;
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+namespace Application;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
+
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Application\Model\UsersTable;
+use Application\Model\Users;
+
+class Module
 {
-    /**
-     * Return an array for passing to Zend\Loader\AutoloaderFactory
-     * @return array
-     * @see \Zend\ModuleManager\Feature\AutoloaderProviderInterface::getAutoloaderConfig()
-     */
-    public function getAutoloaderConfig()
+    public function onBootstrap(MvcEvent $e)
     {
-    	return array(
-    		'Zend\Loader\StandardAutoloader' => array(
-    		  'namespaces' => array(
-    			// Autoload all classes from namespace 'Login' form '/module/Login/src/Login'
-    			__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-    		)
-    	   )
-    	);
-        
+        $eventManager        = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
     }
-    
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }	
-    
-    
+    }
 
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
+    
+    public function getServiceConfig()
+    {
+    	return array(
+    			'factories' => array(
+    					'Application\Model\UsersTable' => function ($sm) {
+    						$tableGateway = $sm->get('UserTableGateway');
+    						$table = new UsersTable($tableGateway);
+    						return $table;
+    					},
+    					'UserTableGateway' => function ($sm) {
+    					    
+                    	    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+    						
+                    	    $resultSetPrototype = new ResultSet();
+    						$resultSetPrototype->setArrayObjectPrototype(new Users());
+    						return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
+    					},
+    			),
+    	);
+    
+    }
+    
+    
 }
-
