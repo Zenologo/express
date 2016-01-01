@@ -19,18 +19,18 @@ class LoginFilter extends InputFilter
 	            array('name' => 'StringTrim'),
 	        ),
 	        'validators' => array(
-	        	array(
-	        	  'name' => 'NotEmpty',
-	        	  'options' => array(
-	        	      'messages' => array($isEmpty => 'Email can not empty.')
-	               ),
-	        	    'break_chain_on_failre' => true
+	            array(
+	            		'name' => 'NotEmpty',
+	            		'options' => array(
+	            			'messages' => array($isEmpty => '邮箱不能为空')
+	            		),
+	            		'break_chain_on_failre' => true
 	            ),
 	            array(
 	        	  'name' => 'EmailAddress',
 	                'options' => array(
 	        	  	   'messages' => array(
-	                	  $invalidEmail => 'Enter Valid Email Address.',
+	                	  $invalidEmail => '无效邮箱地址',
 	                )
 	        	  )  	
 	        	),
@@ -50,7 +50,7 @@ class LoginFilter extends InputFilter
 	            'name' => 'NotEmpty',
 	            'options' => array(
 	        	  'messages' => array(
-	        	      $isEmpty => 'Password can not be empty.'
+	        	      $isEmpty => '密码不能为空'
 	        	  )
 	            )
 	           )

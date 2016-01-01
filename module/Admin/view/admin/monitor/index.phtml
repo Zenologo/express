@@ -1,0 +1,177 @@
+  
+<h1>
+    <?php echo $this->escapehtml("所有客户下单列表")?>
+</h1>
+
+<?php
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$dateDebutElement = new Element\Text("colis-date-debut");
+$dateDebutElement->setAttribute('id', 'admin-colis-date-debut');
+
+
+$dateFinElement = new Element\Text("colis-date-fin");
+$dateFinElement->setAttribute('id','admin-colis-date-fin');
+
+
+$submitElement = new Element\Submit("submit");
+$submitElement->setValue("查询");
+
+
+
+
+$userForm = new Form();
+$userForm->add($submitElement);
+$userForm->add($dateDebutElement);
+$userForm->add($dateFinElement);
+
+//$userForm->setAttribute('action', $this->url('admin', array('debut' => $dateDebutElement->getValue(),
+//     'fin'=>$dateFinElement->getValue()), true));
+
+$userForm->prepare();
+$somme = 0;
+?>
+
+
+
+ 
+ <div id="admin-colis-search">
+
+<table>
+    <tr>
+        <th>开始时间</th>
+        <th>结束时间</th>
+        <th></th>
+        <th style="display: none">邮费总额</th>
+        <th style="display: none">保险总额</th>
+    </tr>
+
+    <tr>
+         <?php echo $this->form()->openTag($userForm); ?>
+            <td> <?php echo $this->formElement($dateDebutElement); ?></td>
+            <td><?php echo $this->formElement($dateFinElement); ?></td>
+            <td><?php echo $this->formelement($submitElement); ?></td>
+        <?php echo $this->form()->closeTag(); ?>
+        <td><?php //echo $this->escapeHtml($this->prixPrevu);?></td>
+        <td><?php //echo $this->escapehtml($this->assurance) ?></td>
+    </tr>
+</table>
+</div>
+ 
+ <br>
+ <br>
+
+
+ <table id='colis-list' class="display dataTable">
+    <thead> 
+    <tr>
+        <th class='details-control'></th>
+        <th>包裹号</th>
+        <th>客户代码</th>
+        <th>客户姓名</th>
+        
+        <th>发件人</th>
+        <th style="display:none">发件人电话</th>
+        <th style="display:none">发件人地址</th>
+        <th style="display:none">发件人城市</th>
+        <th style="display:none">发件人邮编</th>
+
+        
+                
+        <th>收件人</th>
+        <th style="display:none">收件人地址</th>
+        <th style="display:none">收件人城市</th>
+        <th style="display:none">收件人邮编</th>
+        <th style="display:none">收件人电话</th>
+        <th style="display:none">收件人国家</th>
+        <th>包裹估重</th>
+        <th>包裹保险</th>
+        <th>估算邮费</th>
+        <th>下单时间</th>
+        <th>包裹状态</th>
+        
+        <th>实际重量</th>
+        <th>实际邮费</th>
+        <td style="display:none"></td>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach ($this->allColisInfo as $colis): ?>
+    <tr>
+        <td class="details-control"></td>
+        <td><?php 
+                if ($colis['refColis'] != ""){
+                	echo "<a href='" . $colis['pdfUrl'] . "'>" . $this->escapeHtml($colis['refColis']) . "</a>";
+                }else{
+                	echo $this->escapeHtml($colis['refColis']);
+                }
+
+            ?></td>
+        <td><?php echo $this->escapeHtml($colis['ref']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['nom']); ?></td>
+        
+        <td><?php echo $this->escapeHtml($colis['expediteurNom']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurTelephone']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurAdresse']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurVille']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurCodePostale']); ?></td>
+
+        <td><?php echo $this->escapeHtml($colis['destinateurNom']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurAdresse']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurVille']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurCodePostale']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurTelephone']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurPay']); ?></td>
+        
+        <td><?php echo $this->escapeHtml($colis['poidsPrevu']); ?></td>
+        <td><?php echo $this->escapehtml($colis['colisAssurance']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['prixPrevu']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['depotTime']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['state']); ?></td>
+        
+        <td><?php echo $this->escapeHtml($colis['poidsFinal']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['prixFinal']); ?></td>
+        <td style="display:none"><?php echo $colis['id']; ?></td>
+        <td>
+            <?php 
+                if ($colis['refColis'] != ""){
+                	echo "<a href='/colis/telecharger/". $colis['id'] . "'>凭证</a>";
+                }else{
+                	echo "凭证";
+                }
+            ?>
+        </td>
+
+   </tr>
+   <?php endforeach;?>
+   <tfoot>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>总合计:</td>
+        <td id="parcel_assurance">包裹保险</td>
+        <td id="transport_frais">估算邮费</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="transport_frais_final">实际邮费</td>
+        <td></td>
+    </tr>
+   </tfoot>
+   </tbody>
+ </table>
+
+
+
+
+ 
+
+ 
+ 

@@ -1,0 +1,90 @@
+
+<h1>Etiquette</h1>
+
+<?php
+
+use Zend\Form\Form;
+use Zend\Form\Element;
+
+$subRefColis = new Element\Submit("submit");
+$subRefColis->setValue("提交");
+
+$input = new Element\Text("etiquette");
+$input->setAttribute("size", "13");
+$input->setAttribute("id", $this->colis['ref']);
+
+
+$colisForm = new Form();
+$colisForm->add($subRefColis);
+$colisForm->add($input);
+
+
+
+$colisForm->setAttribute('action', $this->url('admin/etiquette', array('etiquette' => $input->getValue()), true));
+$colisForm->prepare();
+?>
+
+
+<?php echo $this->form()->openTag($colisForm);?>
+<table>
+    <tr>
+        <td>客户代码</td>
+        <td><?php echo $this->colis['ref']; ?></td>
+    </tr>
+    <tr>
+        <td>发件人姓名</td>
+        <td><?php echo $this->colis['expediteurNom']; ?></td>
+    </tr>
+    <tr>
+        <td>发件人电话</td>
+        <td><?php echo $this->colis['expediteurTelephone']; ?></td>
+    </tr>
+    <tr>
+        <td>发件人城市</td>
+        <td><?php echo $this->colis['ref']; ?></td>
+    </tr>
+        <tr>
+        <td>发件人邮编</td>
+        <td><?php echo $this->colis['expediteurCodePostale']; ?></td>
+    </tr>
+    <tr>
+        <td>收件人姓名</td>
+        <td><?php echo $this->colis['destinateurNom']; ?></td>
+    </tr>
+    <tr>
+        <td>收件人电话</td>
+        <td><?php echo $this->colis['destinateurTelephone']; ?></td>
+    </tr>
+    <tr>
+        <td>收件人地址</td>
+        <td><?php echo $this->colis['destinateurAdresse']; ?></td>
+    </tr>
+    <tr>
+        <td>收件人城市</td>
+        <td><?php echo $this->colis['destinateurVille']; ?></td>
+    </tr>
+    <tr>
+        <td>收件人邮编</td>
+        <td><?php echo $this->colis['destinateurCodePostale']; ?></td>
+    </tr>
+
+    <tr>
+        <td>帐户余额</td>
+        <td><?php echo $this->colis['compte']; ?></td>
+    </tr>
+
+         
+    <tr>
+        <td>包裹单号</td>
+        <td><?php echo $this->formElement($input)?></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <?php echo $this->formElement($subRefColis)?>
+        </td>
+    </tr>
+</table>
+<?php $this->form()->closeTag(); ?>
+
+
+

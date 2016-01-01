@@ -10,7 +10,10 @@ class IndexControllerFactory implements FactoryInterface
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$realServiceLocator = $serviceLocator->getServiceLocator();
-		
 	    return new IndexController($realServiceLocator->get('Login\Service\UserServiceInterface'));	    
 	}
+	
+	
+	
+	
 }

@@ -1,0 +1,101 @@
+<?php 
+use \Zend\Form\Element;
+use \Zend\Form\Form;
+
+
+$buttonElement = new Element\Submit("add-ads");
+$buttonElement->setValue("添加新地址");
+$newNom = new Element\Text('expediteur_nom');
+$newAds = new Element\textarea('expediteur_ads');
+$newVille = new Element\Text('expediteur_ville');
+$newZip = new Element\Text('expediteur_zip');
+$newTelephone = new Element\Text('expediteur_telephone');
+
+
+
+
+$adsForm = new Form();
+$adsForm->setAttribute('action', $this->url('login/listexpads', array()), true);
+
+$adsForm->add($buttonElement);
+$adsForm->add($newNom);
+$adsForm->add($newAds);
+$adsForm->add($newTelephone);
+$adsForm->add($newVille);
+$adsForm->add($newZip);
+
+
+$adsForm->prepare();
+
+
+?>
+<p>
+<?php 
+if ($this->message != '')
+{
+	echo "<h3>" . $this->message . "</h3>";
+    
+}
+
+
+?>
+
+<table id='list_ads' class='list_ads'>
+    <thead>
+        <tr>
+            <td style="display: none;"></td>
+            <td>寄件人姓名</td>
+            <td>寄件人地址</td>
+            <td>寄件人邮编</td>
+            <td>寄件人城市</td>
+            <td>寄件人国家</td>
+            <td>寄件人电话</td>
+            <td></td>
+        </tr>
+    </thead>
+    <?php 
+       foreach($this->allAds as $ads){    
+            echo "<tr>";
+            echo "<td style='display: none;'>" . $ads['id'] . "</td>";
+            echo "<td>" . $ads['nom'] . "</td>";
+            echo "<td>" . $ads['adresse'] . "</td>";
+            echo "<td>" . $ads['codePostale'] . "</td>";
+            echo "<td>" . $ads['ville'] . "</td>";
+            echo "<td>" . $ads['pays'] . "</td>";
+            echo "<td>" . $ads['telephone'] . "</td>";
+            echo "<td> <a href='deleteexpads/" . $ads['id'] . "'>删除 </a></td>";
+            echo "</tr>";
+        }
+    ?>
+</table>
+
+<p>
+<?php echo $this->form()->openTag($adsForm);?>
+<table id='add_ads' class='ads_ads'>
+        <tr>
+            <td>寄件人姓名</td>
+            <td><?php echo $this->formElement($newNom); ?></td>
+        </tr>
+         <tr>
+            <td>寄件人地址</td>
+            <td><?php echo $this->formElement($newAds); ?></td>
+         </tr>
+         <tr>
+            <td>寄件人邮编</td>
+            <td><?php echo $this->formElement($newZip); ?></td>
+         </tr>
+         <tr>
+            <td>寄件人城市</td>   
+            <td><?php echo $this->formElement($newVille); ?></td>      
+         </tr>
+         <tr>
+             <td>寄件人电话</td>
+             <td><?php echo $this->formElement($newTelephone); ?></td>  
+         </tr>
+         <tr>
+            <td colspan="2"><?php echo $this->formElement($buttonElement); ?></td>
+         </tr>
+</table>
+<?php echo $this->form()->closeTag(); ?>
+
+

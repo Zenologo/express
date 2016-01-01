@@ -1,0 +1,905 @@
+<!-- Filename: /module/Colis/view/colis/write/add.phtml -->
+
+
+<script type="text/javascript">
+
+</script>
+
+
+<div class="commande_title" >
+    <h1><?php echo $this->escapeHtml("客户下单")?> </h1>
+</div>
+
+
+<div class="error_message">
+<?php 
+if($this->message != '')
+{
+    echo $this->message;
+}
+?>
+</div>
+
+
+
+<?php
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+
+
+$depotMode = new Element\Select("depot-mode");
+$depotMode->setValueOptions(array('sur_place'=>'店内投递', 'la_poste'=>'自行投递'));
+$depotMode->setAttribute('id', 'depot-mode');
+
+// Expéditeur
+$expNomElmt = new Element\Text("expediteur-nom");
+$expNomElmt->setAttribute('id', 'expediteur-nom');
+//$expNomElmt->setAttribute("class", "required");
+
+$expAdresseElmt = new Element\Textarea("exp-adresse");
+$expAdresseElmt->setAttribute('id', 'exp-adresse');
+//$expAdresseElmt->setAttribute("class", "required");
+
+$expCodePostaleElmt = new Element\Text("exp-code-postale");
+$expCodePostaleElmt->setAttribute('id', 'exp-code-postale');
+//$expCodePostaleElmt->setAttribute("class", "required");
+
+$expVilleElmt = new Element\Text("exp-ville");
+$expVilleElmt->setAttribute('id', 'exp-ville');
+//$expVilleElmt->setAttribute("class", "required");
+
+$expTelephoneElmt = new Element\Text("exp-telephone");
+$expTelephoneElmt->setAttribute('id', 'exp-telephone');
+//$expTelephoneElmt->setAttribute("class", "required");
+
+$descriptElt1 = new Element\Text("descript1");
+$descriptElt1->setAttribute('id', 'descript1');
+
+$descriptElt2 = new Element\Text("descript2");
+$descriptElt2->setAttribute('id', 'descript2');
+
+$descriptElt3 = new Element\Text("descript3");
+$descriptElt3->setAttribute('id', 'descript3');
+
+$descriptElt4 = new Element\Text("descript4");
+$descriptElt4->setAttribute('id', 'descript4');
+
+$descriptElt5 = new Element\Text("descript5");
+$descriptElt5->setAttribute('id', 'descript5');
+
+$descriptElt6  = new Element\Text("descript6");
+$descriptElt6->setAttribute('id', 'descript6');
+
+$descriptElt7 = new Element\Text("descript7");
+$descriptElt7->setAttribute('id', 'descript7');
+
+$descriptElt8 = new Element\Text("descript8");
+$descriptElt8->setAttribute('id', 'descript8');
+
+$descriptElt9 = new Element\Text("descript9");
+$descriptElt9->setAttribute('id', 'descript9');
+
+$descriptElt10 = new Element\Text("descript10");
+$descriptElt10->setAttribute('id', 'descript10');
+
+$quantityElt1 = new Element\Text("quantity1");
+$quantityElt1->setAttribute('id', 'quantity1');
+
+$quantityElt2 = new Element\Text("quantity2");
+$quantityElt2->setAttribute('id', 'quantity2');
+
+$quantityElt3 = new Element\Text("quantity3");
+$quantityElt3->setAttribute('id', 'quantity3');
+
+$quantityElt4 = new Element\Text("quantity4");
+$quantityElt4->setAttribute('id', 'quantity4');
+
+$quantityElt5 = new Element\Text("quantity5");
+$quantityElt5->setAttribute('id', 'quantity5');
+
+$quantityElt6  = new Element\Text("quantity6");
+$quantityElt6->setAttribute('id', 'quantity6');
+
+$quantityElt7 = new Element\Text("quantity7");
+$quantityElt7->setAttribute('id', 'quantity7');
+
+$quantityElt8 = new Element\Text("quantity8");
+$quantityElt8->setAttribute('id', 'quantity8');
+
+$quantityElt9 = new Element\Text("quantity9");
+$quantityElt9->setAttribute('id', 'quantity9');
+
+$quantityElt10 = new Element\Text("quantity10");
+$quantityElt10->setAttribute('id', 'quantity10');
+
+
+$valeurElt1 = new Element\Text("valeur1");
+$valeurElt1->setAttribute('id', 'valeur1');
+
+$valeurElt2 = new Element\Text("valeur2");
+$valeurElt2->setAttribute('id', 'valeur2');
+
+$valeurElt3 = new Element\Text("valeur3");
+$valeurElt3->setAttribute('id', 'valeur3');
+
+$valeurElt4 = new Element\Text("valeur4");
+$valeurElt4->setAttribute('id', 'valeur4');
+
+$valeurElt5 = new Element\Text("valeur5");
+$valeurElt5->setAttribute('id', 'valeur5');
+
+$valeurElt6  = new Element\Text("valeur6");
+$valeurElt6->setAttribute('id', 'valeur6');
+
+$valeurElt7 = new Element\Text("valeur7");
+$valeurElt7->setAttribute('id', 'valeur7');
+
+$valeurElt8 = new Element\Text("valeur8");
+$valeurElt8->setAttribute('id', 'valeur8');
+
+$valeurElt9 = new Element\Text("valeur9");
+$valeurElt9->setAttribute('id', 'valeur9');
+
+$valeurElt10 = new Element\Text("valeur10");
+$valeurElt10->setAttribute('id', 'valeur10');
+
+
+$poidsElt1 = new Element\Text("poids1");
+$poidsElt1->setAttribute('id', 'poids1');
+
+$poidsElt2 = new Element\Text("poids2");
+$poidsElt2->setAttribute('id', 'poids2');
+
+$poidsElt3 = new Element\Text("poids3");
+$poidsElt3->setAttribute('id', 'poids3');
+
+$poidsElt4 = new Element\Text("poids4");
+$poidsElt4->setAttribute('id', 'poids4');
+
+$poidsElt5 = new Element\Text("poids5");
+$poidsElt5->setAttribute('id', 'poids5');
+
+$poidsElt6  = new Element\Text("poids6");
+$poidsElt6->setAttribute('id', 'poids6');
+
+$poidsElt7 = new Element\Text("poids7");
+$poidsElt7->setAttribute('id', 'poids7');
+
+$poidsElt8 = new Element\Text("poids8");
+$poidsElt8->setAttribute('id', 'poids8');
+
+$poidsElt9 = new Element\Text("poids9");
+$poidsElt9->setAttribute('id', 'poids9');
+
+$poidsElt10 = new Element\Text("poids10");
+$poidsElt10->setAttribute('id', 'poids10');
+
+
+
+
+
+
+
+
+/*
+$destNomOption = array('' => '');
+foreach ($this->allAds as $value)
+{
+    $destNomOption[$value['nom']] = $value['nom'];
+}
+*/
+
+// destinateur
+$desNomElmt = new Element\Text("destinateur-nom");
+$desNomElmt->setAttribute('id', "destinateur-nom");
+$desNomElmt->setAttribute("class", "required");
+
+
+
+
+
+$desAdresseElmt = new Element\Textarea("dest-adresse");
+$desAdresseElmt->setAttribute('id', "dest-adresse");
+$desAdresseElmt->setAttribute("class", "required");
+
+$desCodePostaleElmt = new Element\Text("dest-code-postale");
+$desCodePostaleElmt->setAttribute('id', "dest-code-postale");
+$desCodePostaleElmt->setAttribute("class", "required");
+
+$desVilleElmt = new Element\Text("dest-ville");
+$desVilleElmt->setAttribute('id', "dest-ville");
+$desVilleElmt->setAttribute("class", "required");
+
+$desTelephoneElmt = new Element\Text("dest-telephone");
+$desTelephoneElmt->setAttribute('id', 'dest-telephone');
+$desTelephoneElmt->setAttribute("class", "required");
+
+
+$desPayElmt = new Element\Select("dest-pay");
+$desPayElmt->setAttribute('id', "dest-pay");
+$desPayElmt->setAttributes(array(
+	   'AutoComplete' => true,
+    'required' => true
+));
+$desPayElmt->setAttribute("class", "required");
+
+$desPayElmt->setValueOptions(array(
+   "Chine"=>"Chine","Afghanistan"=>"Afghanistan",
+    "Afrique_Centrale"=>"Afrique_Centrale","Afrique_du_sud"=>"Afrique_du_Sud",
+    "Albanie"=>"Albanie","Algerie"=>"Algerie","Allemagne"=>"Allemagne",
+    "Andorre"=>"Andorre","Angola"=>"Angola","Anguilla"=>"Anguilla",
+    "Arabie_Saoudite"=>"Arabie_Saoudite","Argentine"=>"Argentine","Armenie"=>"Armenie",
+    "Australie"=>"Australie","Autriche"=>"Autriche","Azerbaidjan"=>"Azerbaidjan",
+    "Bahamas"=>"Bahamas","Bangladesh"=>"Bangladesh","Barbade"=>"Barbade",
+    "Bahrein"=>"Bahrein","Belgique"=>"Belgique","Belize"=>"Belize","Benin"=>"Benin",
+    "Bermudes"=>"Bermudes","Bielorussie"=>"Bielorussie","Bolivie"=>"Bolivie",
+    "Botswana"=>"Botswana","Bhoutan"=>"Bhoutan","Boznie_Herzegovine"=>"Boznie_Herzegovine",
+    "Bresil"=>"Bresil","Brunei"=>"Brunei","Bulgarie"=>"Bulgarie","Burkina_Faso"=>"Burkina_Faso",
+    "Burundi"=>"Burundi","Caiman"=>"Caiman","Cambodge"=>"Cambodge","Cameroun"=>"Cameroun",
+    "Canada"=>"Canada","Canaries"=>"Canaries","Cap_vert"=>"Cap_Vert","Chili"=>"Chili",
+    "Chine"=>"Chine" ,"Chypre"=>"Chypre" ,"Colombie"=>"Colombie","Comores"=>"Colombie",
+    "Congo"=>"Congo","Congo_democratique"=>"Congo_democratique","Cook"=>"Cook",
+    "Coree_du_Nord"=>"Coree_du_Nord","Coree_du_Sud"=>"Coree_du_Sud","Costa_Rica"=>"Costa_Rica",
+    "Cote_d_Ivoire"=>"Côte_d_Ivoire","Croatie"=>"Croatie","Cuba"=>"Cuba","Danemark"=>"Danemark",
+    "Djibouti"=>"Djibouti","Dominique"=>"Dominique","Egypte"=>"Egypte",
+    "Emirats_Arabes_Unis"=>"Emirats_Arabes_Unis","Equateur"=>"Equateur","Erythree"=>"Erythree",
+    "Espagne"=>"Espagne","Estonie"=>"Estonie","Etats_Unis"=>"Etats_Unis","Ethiopie"=>"Ethiopie",
+    "Falkland"=>"Falkland","Feroe"=>"Feroe","Fidji"=>"Fidji","Finlande"=>"Finlande",
+    "France"=>"France","Gabon"=>"Gabon","Gambie"=>"Gambie","Georgie"=>"Georgie",
+    "Ghana"=>"Ghana","Gibraltar"=>"Gibraltar","Grece"=>"Grece","Grenade"=>"Grenade",
+    "Groenland"=>"Groenland","Guadeloupe"=>"Guadeloupe","Guam"=>"Guam","Guatemala"=>"Guatemala",
+    "Guernesey"=>"Guernesey","Guinee"=>"Guinee","Guinee_Bissau"=>"Guinee_Bissau",
+    "Guinee equatoriale"=>"Guinee_Equatoriale","Guyana"=>"Guyana","Guyane_Francaise "=>"Guyane_Francaise",
+    "Haiti"=>"Haiti","Hawaii"=>"Hawaii" ,"Honduras"=>"Honduras","Hong_Kong"=>"Hong_Kong",
+    "Hongrie"=>"Hongrie","Inde"=>"Inde","Indonesie"=>"Indonesie","Iran"=>"Iran","Iraq"=>"Iraq",
+    "Irlande"=>"Irlande","Islande"=>"Islande","Israel"=>"Israel","Italie"=>"italie","Jamaique"=>"Jamaique",
+    "Jan Mayen"=>"Jan Mayen","Japon"=>"Japon","Jersey"=>"Jersey","Jordanie"=>"Jordanie",
+    "Kazakhstan"=>"Kazakhstan","Kenya"=>"Kenya","Kirghizstan"=>"Kirghizistan","Kiribati"=>"Kiribati",
+    "Koweit"=>"Koweit","Laos"=>"Laos","Lesotho"=>"Lesotho","Lettonie"=>"Lettonie","Liban"=>"Liban",
+    "Liberia"=>"Liberia","Liechtenstein"=>"Liechtenstein","Lituanie"=>"Lituanie" ,"Luxembourg"=>"Luxembourg",
+    "Lybie"=>"Lybie","Macao"=>"Macao","Macedoine"=>"Macedoine","Madagascar"=>"Madagascar","Madère"=>"Madère",
+    "Malaisie"=>"Malaisie","Malawi"=>"Malawi","Maldives"=>"Maldives","Mali"=>"Mali","Malte"=>"Malte","Man"=>"Man",
+    "Mariannes du Nord"=>"Mariannes du Nord","Maroc"=>"Maroc","Marshall"=>"Marshall","Martinique"=>"Martinique",
+    "Maurice"=>"Maurice","Mauritanie"=>"Mauritanie","Mayotte"=>"Mayotte","Mexique"=>"Mexique","Micronesie"=>"Micronesie",
+    "Midway"=>"Midway","Moldavie"=>"Moldavie","Monaco"=>"Monaco","Mongolie"=>"Mongolie","Montserrat"=>"Montserrat",
+    "Mozambique"=>"Mozambique","Namibie"=>"Namibie","Nauru"=>"Nauru","Nepal"=>"Nepal","Nicaragua"=>"Nicaragua",
+    "Niger"=>"Niger","Nigeria"=>"Nigeria","Niue"=>"Niue","Norfolk"=>"Norfolk","Norvege"=>"Norvege",
+    "Nouvelle_Caledonie"=>"Nouvelle_Caledonie","Nouvelle_Zelande"=>"Nouvelle_Zelande","Oman"=>"Oman",
+    "Ouganda"=>"Ouganda","Ouzbekistan"=>"Ouzbekistan","Pakistan"=>"Pakistan","Palau"=>"Palau","Palestine"=>"Palestine",
+    "Panama"=>"Panama","Papouasie_Nouvelle_Guinee"=>"Papouasie_Nouvelle_Guinee","Paraguay"=>"Paraguay",
+    "Pays_Bas"=>"Pays_Bas","Perou"=>"Perou","Philippines"=>"Philippines" ,"Pologne"=>"Pologne","Polynesie"=>"Polynesie",
+    "Porto_Rico"=>"Porto_Rico","Portugal"=>"Portugal","Qatar"=>"Qatar","Republique_Dominicaine"=>"Republique_Dominicaine",
+    "Republique_Tcheque"=>"Republique_Tcheque","Reunion"=>"Reunion","Roumanie"=>"Roumanie","Royaume_Uni"=>"Royaume_Uni",
+    "Russie"=>"Russie","Rwanda"=>"Rwanda","Sahara Occidental"=>"Sahara Occidental","Sainte_Lucie"=>"Sainte_Lucie",
+    "Saint_Marin"=>"Saint_Marin","Salomon"=>"Salomon","Salvador"=>"Salvador","Samoa_Occidentales"=>"Samoa_Occidentales</option=>",
+    "Samoa_Americaine"=>"Samoa_Americaine","Sao_Tome_et_Principe"=>"Sao_Tome_et_Principe" ,"Senegal"=>"Senegal",
+    "Seychelles"=>"Seychelles","Sierra Leone"=>"Sierra Leone","Singapour"=>"Singapour","Slovaquie"=>"Slovaquie",
+    "Slovenie"=>"Slovenie</option=>","Somalie"=>"Somalie","Soudan"=>"Soudan" ,"Sri_Lanka"=>"Sri_Lanka" ,"Suede"=>"Suede",
+    "Suisse"=>"Suisse","Surinam"=>"Surinam","Swaziland"=>"Swaziland","Syrie"=>"Syrie","Tadjikistan"=>"Tadjikistan",
+    "Taiwan"=>"Taiwan","Tonga"=>"Tonga","Tanzanie"=>"Tanzanie","Tchad"=>"Tchad","Thailande"=>"Thailande","Tibet"=>"Tibet",
+    "Timor_Oriental"=>"Timor_Oriental","Togo"=>"Togo" ,"Trinite_et_Tobago"=>"Trinite_et_Tobago",
+    "Tristan da cunha"=>"Tristan de cuncha","Tunisie"=>"Tunisie","Turkmenistan"=>"Turmenistan" ,"Turquie"=>"Turquie",
+    "Ukraine"=>"Ukraine","Uruguay"=>"Uruguay","Vanuatu"=>"Vanuatu","Vatican"=>"Vatican","Venezuela"=>"Venezuela",
+    "Vierges_Americaines"=>"Vierges_Americaines","Vierges_Britanniques"=>"Vierges_Britanniques","Vietnam"=>"Vietnam",
+    "Wake"=>"Wake","Wallis et Futuma"=>"Wallis et Futuma","Yemen"=>"Yemen","Yougoslavie"=>"Yougoslavie","Zambie"=>"Zambie",
+    "Zimbabwe"=>"Zimbabwe",
+));
+
+
+// colis
+$colisPoindsPrevu = new Element\Select("colis-poinds-prevu");
+$colisPoindsPrevu->setValueOptions(array(
+    '0' => '请选择公斤数(必选)',
+    '1kg' => '1公斤',
+    '2kg' => '2公斤',
+    '3kg' => '3公斤',
+    '4kg' => '4公斤',
+    '5kg' => '5公斤',
+    '6kg' => '6公斤',
+    '7kg' => '7公斤',
+    '8kg' => '8公斤',
+    '9kg' => '9公斤',
+    '10kg' => '10公斤',
+    '15kg' => '15公斤',
+    '20kg' => '20公斤',
+    '25kg' => '25公斤',
+    '30kg' => '30公斤',    
+    
+));
+$colisPoindsPrevu->setAttribute("id", "colis-poinds-prevu");
+$colisPoindsPrevu->setAttribute("class", "required");
+
+
+$colisGenre = new Element\Select("colis-genre");
+$colisGenre->setLabel("货品种类");
+$colisGenre->setAttribute("id", "colis-genre");
+$colisGenre->setValueOptions(array(
+    '0' => '请选择物品种类(必选)',
+	'LAIT EN POUDRE' => '奶粉',
+    'VETEMENT' => '衣物',
+    'VIN ROUGE' => '酒类',
+    'SOINS DE LA PEAU' => '化妆品&护肤品',
+    'ALIMENT' => '食物',
+    'PRODUIT QUOTIDIEN' => '日常用品',
+    'SAC' => '箱包类',
+    'CHAUSSURE' => '鞋子'
+));
+$colisGenre->setAttribute("class", "required");
+
+$colisAssurence = new Element\Select("colis-assurance");
+$colisAssurence->setValueOptions(array(
+    '0' => '请选择保险金额(可选)',
+	'4' => '4€(保值500欧)', 
+    '8' => '8€((保值1000欧)', 
+    '12' => '12€((保值1500欧)',
+));
+$colisAssurence->setAttribute("id", "colis-assurance");
+$colisAssurence->setAttribute("class", "required");
+
+$submitElmt = new Element\Submit("submit-colis");
+$submitElmt->setValue("提交表单");
+$submitElmt->setAttribute("class", "submit");
+$submitElmt->setAttribute("id", "submit");
+
+$fraisNomElmt = new Element\Text("colis-frais");
+
+
+$form = new Form();
+$form->add($depotMode);
+$form->add($expNomElmt);
+$form->add($expAdresseElmt);
+$form->add($expCodePostaleElmt);
+$form->add($expVilleElmt);
+$form->add($expTelephoneElmt);
+$form->add($desNomElmt);
+$form->add($desAdresseElmt);
+$form->add($desCodePostaleElmt);
+$form->add($desVilleElmt);
+$form->add($desTelephoneElmt);
+$form->add($desPayElmt);
+$form->add($colisPoindsPrevu);
+$form->add($colisGenre);
+$form->add($fraisNomElmt);
+$form->add($submitElmt);
+
+
+$form->add($descriptElt1);
+$form->add($descriptElt2);
+$form->add($descriptElt3);
+$form->add($descriptElt4);
+$form->add($descriptElt5);
+$form->add($descriptElt6);
+$form->add($descriptElt7);
+$form->add($descriptElt8);
+$form->add($descriptElt9);
+$form->add($descriptElt10);
+
+$form->add($quantityElt1);
+$form->add($quantityElt2);
+$form->add($quantityElt3);
+$form->add($quantityElt4);
+$form->add($quantityElt5);
+$form->add($quantityElt6);
+$form->add($quantityElt7);
+$form->add($quantityElt8);
+$form->add($quantityElt9);
+$form->add($quantityElt10);
+
+$form->add($valeurElt1);
+$form->add($valeurElt2);
+$form->add($valeurElt3);
+$form->add($valeurElt4);
+$form->add($valeurElt5);
+$form->add($valeurElt6);
+$form->add($valeurElt7);
+$form->add($valeurElt8);
+$form->add($valeurElt9);
+$form->add($valeurElt10);
+
+$form->add($poidsElt1);
+$form->add($poidsElt2);
+$form->add($poidsElt3);
+$form->add($poidsElt4);
+$form->add($poidsElt5);
+$form->add($poidsElt6);
+$form->add($poidsElt7);
+$form->add($poidsElt8);
+$form->add($poidsElt9);
+$form->add($poidsElt10);
+
+
+
+
+$form->setAttribute("id", "colis_add_form");
+
+echo $this->form()->openTag($form);
+?>
+
+
+
+    <div>
+        <h3>投递方式</h3>
+            <section>
+                <label class="depot-mode" for="depot-mode">请选择投递方式</label>
+                <?php echo $this->formelement($depotMode)?>
+            
+            </section>
+        <h3>发件人信息</h3>
+            <section>
+                <label for="expNom_Select">发件人姓名 *</label>
+                <!-- <input id="userName" name="userName" type="text" class="required"> -->   
+                <div class="ui-widget">
+                     <select id='expNom_Select' style="display: none;"> 
+                     <option value="0"></option>
+                    <?php         
+                        $index = 1; 
+                        foreach ($this->allAds as $value){
+                            if ($value['expediteur'] == 1) 
+                                echo "<option value=' " . $index++. "'>" . $value['nom'] . "</option>";
+                        }
+                    ?>
+                    
+                    </select>
+                </div>   
+
+                <label class="expTelephone" for="exp-telephone">发件人电话 *</label>
+                <!--  <input id="expTelephone" name="expTelephone" type="text" class="required"> -->
+                <?php echo $this->formElement($expTelephoneElmt);?>
+                
+                <label for="exp-adresse">发件人地址 *</label>
+                <!--  <input id="password" name="password" type="text" class="required">  -->
+                <?php echo $this->formelement($expAdresseElmt); ?>
+                
+                <label for="exp-ville">发件人地城市 *</label>
+                <!-- <input id="confirm" name="confirm" type="text" class="required"> -->
+                <?php echo $this->formelement($expVilleElmt); ?>
+                
+                <label for="exp-code-postale">发件人邮编 *</label>
+                <!-- <input id="expCodePostale" name="expCodePostale" type="text" class="required"> -->
+                <?php echo $this->formelement($expCodePostaleElmt); ?>
+                <p>(*) 必填项</p>
+            </section>
+            
+            <h3>收件人信息</h3>
+            <section>
+                <label for="desNom_Select">收件人姓名 *</label>
+                <div class="ui-widget">
+                     <select id='desNom_Select' style="display: none;"> 
+                     <option value="0"></option>
+                    <?php         
+                        $index = 1;
+                        foreach ($this->allAds as $value){
+                            if ($value['expediteur'] == 0) 
+                                echo "<option value=' " . $index++. "'>" . $value['nom'] . "</option>";
+                        }
+                    ?>
+                    
+                    </select>
+                </div>            
+                           
+                
+                <label for="dest-telephone">收件人电话 *</label>
+                <?php echo $this->formelement($desTelephoneElmt) ?>
+                
+                
+                <label for="dest-adresse">收件人地址 *</label>
+                <?php echo $this->formElement($desAdresseElmt)?>
+
+                <label for="dest-code-postale">收件人邮编 *</label>
+                <!-- <input id="address" name="address" type="text"> -->
+                <?php echo $this->formElement($desCodePostaleElmt)?>
+                
+                <label for="dest-ville">收件人城市 *</label>
+                <!-- <input id="address" name="address" type="text"> -->
+                <?php echo $this->formElement($desVilleElmt)?>
+                
+                <label for="dest-pay">收件人国家 *</label>
+                <!-- <input id="address" name="address" type="text"> -->
+                <?php echo $this->formElement($desPayElmt)?>                
+                
+                <p>(*) 必填项</p>
+            </section>
+            <h3>包裹信息</h3>
+            <section>
+                <label for="colis-genre">物品种类 *</label>
+                <?php echo $this->formElement($colisGenre)?>                
+                
+                <label for="colis-poinds-prevu">包裹估重 *</label>
+                <?php echo $this->formElement($colisPoindsPrevu)?>            
+                
+                <label for="colis-assurance">保险金额 *</label>
+                <?php echo $this->formElement($colisAssurence)?>
+                
+                <p><p>
+                <label for="colis-total">收费金额</label>
+                <span  id="colis-total" class="colis-total">0.00€ </span>
+            </section>
+            <h3>物品详细信息</h3>
+            <section>
+                 <div id="colis-contain" class="ui-widget">
+                    <table id="articles" class="ui-widget ui-widget-content">
+                        <thead>
+                            <tr class="ui-widget-header ">
+                                <th></th>
+                                <th>物品描述</th>
+                                <th>数量</th>
+                                <th>重量</th>
+                                <th>价值</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>总计</td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div id="quantityTotal"></div>                                
+                                </td>
+                                <td>
+                                    <div id="weightTotal"></div>
+                                </td>
+                                <td>
+                                    <div id="ValeurTotal"></div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>     
+                    <br>   
+                    <a href="#"><span id="addArticle" class="addArticle"> 添加物品描述</span></a>        
+                </div>
+            </section>
+                        
+  </div>
+        
+        
+
+
+
+
+
+
+
+
+
+    <table id=<?php echo $this->vip?> class="recommand" style="display: none">
+            <tr >
+            <td> <?php echo $this->formElement($expNomElmt) ?></td>
+            <td> <?php echo $this->formElement($desNomElmt) ?></td>
+        </tr>
+        <tr>
+            <td>
+               <?php echo $this->formElement($descriptElt1) ?>
+               <?php echo $this->formElement($descriptElt2) ?>
+               <?php echo $this->formElement($descriptElt3) ?>
+               <?php echo $this->formElement($descriptElt4) ?>
+               <?php echo $this->formElement($descriptElt5) ?>
+               <?php echo $this->formElement($descriptElt6) ?>
+               <?php echo $this->formElement($descriptElt7) ?>
+               <?php echo $this->formElement($descriptElt8) ?>
+               <?php echo $this->formElement($descriptElt9) ?>
+               <?php echo $this->formElement($descriptElt10) ?>
+ 
+               <?php echo $this->formElement($quantityElt1) ?>
+               <?php echo $this->formElement($quantityElt2) ?>
+               <?php echo $this->formElement($quantityElt3) ?>
+               <?php echo $this->formElement($quantityElt4) ?>
+               <?php echo $this->formElement($quantityElt5) ?>
+               <?php echo $this->formElement($quantityElt6) ?>
+               <?php echo $this->formElement($quantityElt7) ?>
+               <?php echo $this->formElement($quantityElt8) ?>
+               <?php echo $this->formElement($quantityElt9) ?>
+               <?php echo $this->formElement($quantityElt10) ?>
+               
+               <?php echo $this->formElement($poidsElt1) ?>
+               <?php echo $this->formElement($poidsElt2) ?>
+               <?php echo $this->formElement($poidsElt3) ?>
+               <?php echo $this->formElement($poidsElt4) ?>
+               <?php echo $this->formElement($poidsElt5) ?>
+               <?php echo $this->formElement($poidsElt6) ?>
+               <?php echo $this->formElement($poidsElt7) ?>
+               <?php echo $this->formElement($poidsElt8) ?>
+               <?php echo $this->formElement($poidsElt9) ?>
+               <?php echo $this->formElement($poidsElt10) ?>
+               
+               <?php echo $this->formElement($valeurElt1) ?>
+               <?php echo $this->formElement($valeurElt2) ?>
+               <?php echo $this->formElement($valeurElt3) ?>
+               <?php echo $this->formElement($valeurElt4) ?>
+               <?php echo $this->formElement($valeurElt5) ?>
+               <?php echo $this->formElement($valeurElt6) ?>
+               <?php echo $this->formElement($valeurElt7) ?>
+               <?php echo $this->formElement($valeurElt8) ?>
+               <?php echo $this->formElement($valeurElt9) ?>
+               <?php echo $this->formElement($valeurElt10) ?>
+               
+            </td> 
+            <td><?php echo $this->formelement($submitElmt)?></td>
+        </tr>        
+    
+    </table>
+<?php echo $this->form()->closeTag();?>
+
+
+
+  
+    
+  <div id="dialog-form" title="物品详细描述">
+  <p class="validateTips">物品详细描述最多可填写10个</p>
+  <form>
+    <fieldset>
+      <label for="description">物品种类(法文或拼音)</label>
+      <input name="description" id="description" type='text'></input>   
+      <label for="quantity">数量</label>
+      <input type="text" name="quantity" id="quantity" value="1" class="text ui-widget-content ui-corner-all">
+      <label for="poids">单个重量(不能大于包裹总重量)</label>
+      <input type="text" name="poids" id="poids" value="1" class="text ui-widget-content ui-corner-all">
+       <label for="valeur">价值(建议总价值不超过100欧元)</label>
+      <input type="text" name="valeur" id="valeur" value="1" class="text ui-widget-content ui-corner-all">
+     
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+    
+    
+    
+    
+    
+    
+
+
+<table id="prix"  style="display: none;">
+    <tr>
+       <td>kg</td>
+       <td>membre</td>   
+       <td>vip</td>
+       <td>membre_sur_place </td>
+        <td>vip_sur_place</td>
+        <td>la_poste</td>
+       <td>interimaire</td>
+        <td>exterieur</td>
+    </tr>
+    <tr>
+       <td><?php echo $this->prix[0]['kg']?></td>
+       <td><?php echo $this->prix[0]['membre']?></td>
+       <td><?php echo $this->prix[0]['vip']?></td>
+       <td><?php echo $this->prix[0]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[0]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[0]['la_poste']?></td>
+       <td><?php echo $this->prix[0]['interimaire']?></td>
+       <td><?php echo $this->prix[0]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[1]['kg']?></td>
+       <td><?php echo $this->prix[1]['membre']?></td>
+       <td><?php echo $this->prix[1]['vip']?></td>
+       <td><?php echo $this->prix[1]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[1]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[1]['la_poste']?></td>
+       <td><?php echo $this->prix[1]['interimaire']?></td>
+       <td><?php echo $this->prix[1]['exterieur']?></td>
+    </tr>
+    
+    
+    <tr>
+       <td><?php echo $this->prix[2]['kg']?></td>
+       <td><?php echo $this->prix[2]['membre']?></td>
+       <td><?php echo $this->prix[2]['vip']?></td>
+       <td><?php echo $this->prix[2]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[2]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[2]['la_poste']?></td>
+       <td><?php echo $this->prix[2]['interimaire']?></td>
+       <td><?php echo $this->prix[2]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[3]['kg']?></td>
+       <td><?php echo $this->prix[3]['membre']?></td>
+       <td><?php echo $this->prix[3]['vip']?></td>
+       <td><?php echo $this->prix[3]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[3]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[3]['la_poste']?></td>
+       <td><?php echo $this->prix[3]['interimaire']?></td>
+       <td><?php echo $this->prix[3]['exterieur']?></td>
+    </tr>
+     <tr>
+       <td><?php echo $this->prix[4]['kg']?></td>
+       <td><?php echo $this->prix[4]['membre']?></td>
+       <td><?php echo $this->prix[4]['vip']?></td>
+       <td><?php echo $this->prix[4]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[4]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[4]['la_poste']?></td>
+       <td><?php echo $this->prix[4]['interimaire']?></td>
+       <td><?php echo $this->prix[4]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[5]['kg']?></td>
+       <td><?php echo $this->prix[5]['membre']?></td>
+       <td><?php echo $this->prix[5]['vip']?></td>
+       <td><?php echo $this->prix[5]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[5]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[5]['la_poste']?></td>
+       <td><?php echo $this->prix[5]['interimaire']?></td>
+       <td><?php echo $this->prix[5]['exterieur']?></td>
+    </tr>
+    
+    
+    <tr>
+       <td><?php echo $this->prix[6]['kg']?></td>
+       <td><?php echo $this->prix[6]['membre']?></td>
+       <td><?php echo $this->prix[6]['vip']?></td>
+       <td><?php echo $this->prix[6]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[6]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[6]['la_poste']?></td>
+       <td><?php echo $this->prix[6]['interimaire']?></td>
+       <td><?php echo $this->prix[6]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[7]['kg']?></td>
+       <td><?php echo $this->prix[7]['membre']?></td>
+       <td><?php echo $this->prix[7]['vip']?></td>
+       <td><?php echo $this->prix[7]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[7]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[7]['la_poste']?></td>
+       <td><?php echo $this->prix[7]['interimaire']?></td>
+       <td><?php echo $this->prix[7]['exterieur']?></td>
+    </tr>
+    
+        <tr>
+       <td><?php echo $this->prix[8]['kg']?></td>
+       <td><?php echo $this->prix[8]['membre']?></td>
+       <td><?php echo $this->prix[8]['vip']?></td>
+       <td><?php echo $this->prix[8]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[8]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[8]['la_poste']?></td>
+       <td><?php echo $this->prix[8]['interimaire']?></td>
+       <td><?php echo $this->prix[8]['exterieur']?></td>
+    </tr>
+     <tr>
+       <td><?php echo $this->prix[9]['kg']?></td>
+       <td><?php echo $this->prix[9]['membre']?></td>
+       <td><?php echo $this->prix[9]['vip']?></td>
+       <td><?php echo $this->prix[9]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[9]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[9]['la_poste']?></td>
+       <td><?php echo $this->prix[9]['interimaire']?></td>
+       <td><?php echo $this->prix[9]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[10]['kg']?></td>
+       <td><?php echo $this->prix[10]['membre']?></td>
+       <td><?php echo $this->prix[10]['vip']?></td>
+       <td><?php echo $this->prix[10]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[10]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[10]['la_poste']?></td>
+       <td><?php echo $this->prix[10]['interimaire']?></td>
+       <td><?php echo $this->prix[10]['exterieur']?></td>
+    </tr>
+    
+    
+    <tr>
+       <td><?php echo $this->prix[11]['kg']?></td>
+       <td><?php echo $this->prix[11]['membre']?></td>
+       <td><?php echo $this->prix[11]['vip']?></td>
+       <td><?php echo $this->prix[11]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[11]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[11]['la_poste']?></td>
+       <td><?php echo $this->prix[11]['interimaire']?></td>
+       <td><?php echo $this->prix[11]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[12]['kg']?></td>
+       <td><?php echo $this->prix[12]['membre']?></td>
+       <td><?php echo $this->prix[12]['vip']?></td>
+       <td><?php echo $this->prix[12]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[12]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[12]['la_poste']?></td>
+       <td><?php echo $this->prix[12]['interimaire']?></td>
+       <td><?php echo $this->prix[12]['exterieur']?></td>
+    </tr>
+    
+    <tr>
+       <td><?php echo $this->prix[13]['kg']?></td>
+       <td><?php echo $this->prix[13]['membre']?></td>
+       <td><?php echo $this->prix[13]['vip']?></td>
+       <td><?php echo $this->prix[13]['membre_sur_place']?></td>
+       <td><?php echo $this->prix[13]['vip_sur_place']?></td>
+       <td><?php echo $this->prix[13]['la_poste']?></td>
+       <td><?php echo $this->prix[13]['interimaire']?></td>
+       <td><?php echo $this->prix[13]['exterieur']?></td>
+    </tr>
+</table>
+
+<p>
+<table id='userAds' style="display: none;">
+            <tr>
+            <td id='id'></td>
+            <td id='nom'></td>    
+            <td id='zip'></td>
+            <td id='ads'></td>
+            <td id='ville'></td>
+            <td id='tel'></td>
+            </tr>
+    <?php 
+        foreach ($this->allAds as $value){
+            if ($value['expediteur'] == 0){
+                echo "<tr>";
+                echo "<td id='id'>" . $value['id'] . "</td>";
+                echo "<td id='nom'>" . $value['nom'] . "</td>";    
+                echo "<td id='zip'>" . $value['codePostale'] . "</td>";
+                echo "<td id='ads'>" . $value['adresse'] . "</td>";
+                echo "<td id='ville'>" . $value['ville'] . "</td>";
+                echo "<td id='tel'>" . $value['telephone'] . "</td>";
+                echo "</tr>";
+            }
+        }
+    ?>
+</table>
+
+
+<p>
+<table id='userExpAds' style="display: none;" >
+            <tr>
+            <td id='id'></td>
+            <td id='nom'></td>    
+            <td id='zip'></td>
+            <td id='ads'></td>
+            <td id='ville'></td>
+            <td id='tel'></td>
+            </tr>
+    <?php 
+        foreach ($this->allAds as $value){
+            if ($value['expediteur'] == 1){
+                echo "<tr>";
+                echo "<td id='id'>" . $value['id'] . "</td>";
+                echo "<td id='nom'>" . $value['nom'] . "</td>";    
+                echo "<td id='zip'>" . $value['codePostale'] . "</td>";
+                echo "<td id='ads'>" . $value['adresse'] . "</td>";
+                echo "<td id='ville'>" . $value['ville'] . "</td>";
+                echo "<td id='tel'>" . $value['telephone'] . "</td>";
+                echo "</tr>";
+            }
+        }
+    ?>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,142 +1,46 @@
 <?php
-namespace Login;
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/Colis for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
+namespace Colis;
+
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\Authentication\Adapter\DbTable as DbAuthAdapter;
-use Zend\Authentication\AuthenticationService;
-use Zend\Session\Container;
-use Zend\Session\Config\SessionConfig;
-use Zend\Session\SessionManager;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface
+class Module implements AutoloaderProviderInterface
 {
-    
-    public function onBootstrap(MvcEvent $e)
-    {
-    	$eventManager = $e->getApplication()->getEventManager();
-    	$moduleRouteListener = new ModuleRouteListener();
-    	$moduleRouteListener->attach($eventManager);
-    
-    	$serviceManager = $e->getApplication()->getServiceManager();
-    
-    	$eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
-    			$this,
-    			'boforeDispatch'
-    	), 100);
-    	$eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
-    			$this,
-    			'afterDispatch'
-    	), -100);
-    	
-    	// Config session manager
-/*    	$config = $this->getAutoloaderConfig();
-    	$sessionConfig = new SessionConfig();
-    	$sessionConfig->setOptions($config['session']);
-    	$sessionManager = new SessionManager($sessionConfig);
-    	$sessionManager->start();
-    	Container::setDefaultManager($sessionManager);
- */  	
-    }
-    
-    
-    function boforeDispatch(MvcEvent $event){
-        
-        /*
-    	$request = $event->getRequest();
-    	$response = $event->getResponse();
-    	$target = $event->getTarget ();
-    
-    	// Offline pages not needed authentication 
-    	$whiteList = array ('Login\Controller\Login-index');
-    
-    	$requestUri = $request->getRequestUri();
-    	$controller = $event->getRouteMatch ()->getParam ('controller');
-    	$action = $event->getRouteMatch ()->getParam ('action');
-    
-    	$requestedResourse = $controller . "-" . $action;
-    
-    	$session = new Container('User');
-    
-    	if ($session->offsetExists ( 'email' )) {
-    		if ($requestedResourse == 'Application\Controller\Login-index' || in_array ( $requestedResourse, $whiteList )) {
-    			$url = '/application/index';
-    			$response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
-    			$response->setStatusCode ( 302 );
-    		}
-    	}else{
-    
-    		if ($requestedResourse != 'Login\Controller\Login' && ! in_array ( $requestedResourse, $whiteList )) {
-    			$url = '/';
-    			
-    			echo "this is module";
-    			$response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
-    			$response->setStatusCode ( 302 );
-    		}
-    		$response->sendHeaders ();
-    	}
-    
-    	//print "Called before any controller action called. Do any operation.";
-    	 */
-    
-    }
-    
-    
-    
-    
-    
-    function afterDispatch(MvcEvent $event){
-    	//print "Called after any controller action called. Do any operation.";
-    }
-    
-    /**
-     * Return an array for passing to Zend\Loader\AutoloaderFactory
-     * @return array
-     * @see \Zend\ModuleManager\Feature\AutoloaderProviderInterface::getAutoloaderConfig()
-     */
     public function getAutoloaderConfig()
     {
-    	return array(
-    		'Zend\Loader\StandardAutoloader' => array(
-    		  'namespaces' => array(
-    			// Autoload all classes from namespace 'Login' form '/module/Login/src/Login'
-    			__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-    		)
-    	   )
-    	);
-        
+        return array(
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/autoload_classmap.php',
+            ),
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+		    // if we're in a namespace deeper than one level we need to fix the \ in the path
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
+                ),
+            ),
+        );
     }
-    
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }	
-    
-    
-    public function getServiceConfig()
-    {
-    	return array(
-			'factories' => array(
-			    'Login\Model\LoginAuthStorage' => function($sm){
-				    return new \Login\Model\LoginAuthStorage("zf_tutorial");
-			     }, 
-    			'AuthService' => function ($serviceManager) {
-    				$adapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
-    				$dbAuthAdapter = new DbAuthAdapter ( $adapter, 'users', 'email', 'pwd' );
-    				 
-    				$auth = new AuthenticationService();
-    				$auth->setAdapter ( $dbAuthAdapter );
-                    $auth->setStorage($serviceManager->get('Login\Model\LoginAuthStorage'));
-    				return $auth;
-    			}
-			),
-    			
-    			
-    	);
     }
-    
 
+    public function onBootstrap(MvcEvent $e)
+    {
+        // You may not need to do this if you're doing it elsewhere in your
+        // application
+        $eventManager        = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+    }
 }
-

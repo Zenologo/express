@@ -1,0 +1,14 @@
+<h1> WriteController::editAction</h1>
+
+<?php 
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('colis/edit', array(), true));
+$from->prepare();
+
+$from->get('submit')->setValue('Update Colis');
+
+echo $this->form()->openTag($form);
+echo $this->formcollection($form);
+echo $this->form()->closeTag();
+

@@ -23,23 +23,16 @@ class UserFieldset extends Fieldset
     			'type' => 'text',
     		    'name' => 'nom',
     		    'options' => array(
-    			 'label' => 'nom'
+    			 'label' => '会员姓名'
     		    )
 		));
 		
-		$this->add(array(
-    			'type' => 'text',
-    		    'name' => 'prenom',
-    		    'options' => array(
-    			'label' => 'prenom'
-    		    )
-		));
 		
 		$this->add(array(
     			'type' => 'text',
     		    'name' => 'email',
     		    'options' => array(
-    			 'label' => 'Email'
+    			 'label' => '会员邮箱'
     		    )
 		));
 		
@@ -47,7 +40,7 @@ class UserFieldset extends Fieldset
     			'type' => 'text',
     		    'name' => 'adresse',
     		    'options' => array(
-    			 'label' => 'Adresse'
+    			 'label' => '详细地址'
     		    )
 		));
 		
@@ -55,7 +48,7 @@ class UserFieldset extends Fieldset
     			'type' => 'text',
     			'name' => 'telephone',
     			'options' => array(
-    				 'label' => 'Telephone'
+    				 'label' => '联系电话'
     			)
 		));
 		
@@ -63,7 +56,7 @@ class UserFieldset extends Fieldset
 				'type' => 'text',
 				'name' => 'pay',
 				'options' => array(
-					 'label' => 'Pay'
+					 'label' => '所在国家'
 				)
 		));
 		
@@ -71,9 +64,18 @@ class UserFieldset extends Fieldset
 				'type' => 'text',
 				'name' => 'pwd',
 				'options' => array(
-					 'label' => 'Password'
+					 'label' => '会员密码'
 				)
 		));
+		
+		$this->add(array(
+				'type' => 'text',
+				'name' => 'admmin',
+				'options' => array(
+						'label' => '管理员等级'
+				)
+		));
+				
 		
 		
 	}

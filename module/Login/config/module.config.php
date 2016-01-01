@@ -20,6 +20,7 @@ return array(
     						),
 							'may_terminate' => true,
 							'child_routes' => array(
+							    
 								'detail' => array(
     								'type' => 'segment', 
     								'options' => array(
@@ -65,6 +66,18 @@ return array(
 									    ),
 									),
 								), // add
+								
+							    
+							    'logout' => array(
+							    		'type' => 'literal',
+							    		'options' => array(
+							    				'route' => '/logout',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\login',
+							    						'action' => 'logout'
+							    				),
+							    		),
+							    ), // add
 							    
 							    'edit' => array(
 	                               'type' => 'segment',
@@ -94,20 +107,99 @@ return array(
 							    		)
 							    ), // delete
 							    
+							    'listads' => array(
+							    		'type' => 'literal',
+							    		'options' => array(
+							    				'route' => '/listads',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'listAds'
+							    				),
+							    		)
+							    ), // listAds
+							    
+							    'modif' => array(
+							    		'type' => 'literal',
+							    		'options' => array(
+							    				'route' => '/modif',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'modif'
+							    				),
+							    		)
+							    ), // modif
+							    
+							    'addAds' => array(
+							    		'type' => 'literal',
+							    		'options' => array(
+							    				'route' => '/listadd',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'add'
+							    				),
+							    		)
+							    ), // addAds
+
+							    'deleteAds' => array(
+							    		'type' => 'Segment',
+							    		'options' => array(
+							    				'route' => '/deleteads[/:id]',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'delete'
+							    				),
+							    		    'constraints' => array(
+							    		    		'id' => '\d+'
+							    		    )
+							    		)
+							    ), // deleteAds
+							    
+							    
+							    'listexpads' => array(
+							    		'type' => 'literal',
+							    		'options' => array(
+							    				'route' => '/listexpads',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'listExpAds'
+							    				),
+							    		)
+							    ), // list expéditeur ads
+							    
+
+							    'deleteExpAds' => array(
+							    		'type' => 'Segment',
+							    		'options' => array(
+							    				'route' => '/deleteexpads[/:id]',
+							    				'defaults' => array(
+							    						'controller' => 'Login\Controller\UserInfo',
+							    						'action' => 'deleteexpads'
+							    				),
+							    		    'constraints' => array(
+							    		    		'id' => '\d+'
+							    		    )
+							    		)
+							    ), // deleteAds
+							    
 							)
     				),
     		),
       ),
       'controllers' => array(
+/*           
           'invokables' => array(
           		'Login\Controller\Login' => 'Login\Controller\LoginController'
-          ),
+          ), 
+*/
           'factories' => array (
       	         'Login\Controller\Index' => 'Login\Factory\IndexControllerFactory',
                  'Login\Controller\Write' => 'Login\Factory\WriteControllerFactory',
                  'Login\Controller\Delete' => 'Login\Factory\DeleteControllerFactory',
+                 'Login\Controller\Login' =>  'Login\Factory\LoginControllerFactory',
+                 'Login\Controller\UserInfo' => 'Login\Factory\UserInfoControllerFactory'
           ), 
-    	),    
+    	), 
+       
     'view_manager' => array(
     		'template_path_stack' => array(
     			__DIR__ . '/../view',

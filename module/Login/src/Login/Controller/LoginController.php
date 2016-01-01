@@ -7,11 +7,44 @@ use Login\Form\LoginForm;
 use Login\Form\LoginFilter;
 use Login\Utility\UserPassword;
 use Zend\Mvc\Controller\AbstractActionController;
+use Login\Service\UserServiceInterface;
+
+
 
 class LoginController extends AbstractActionController
 {
 	protected $storage;
 	protected $authservice;
+	protected $userService;
+	
+	public function __construct(UserServiceInterface $userService)
+	{
+	   $this->userService = $userService;	
+	}
+	
+	
+	
+	
+	private function isAdmin($email)
+	{
+		$admin = $this->userService->isAdmin($email);
+	    if (0 == $admin)
+	    {
+		    $session = new Container("User");
+            $session->offsetSet('email', $email);
+            $session->offsetSet('admin', "0");
+	        return false; 
+	    }
+	    
+	    $session = new Container("User");
+	    $session->offsetSet('email', $email);
+	    $session->offsetSet('admin', $admin);
+	    return true;
+	    
+	}
+	
+	
+	
 	
 	public function loginAction()
 	{
@@ -21,25 +54,22 @@ class LoginController extends AbstractActionController
 		$view = new ViewModel();
 		$loginForm = new LoginForm('loginForm');
 	    $loginForm->setInputFilter(new LoginFilter());
+	    $message = "";
 	    
 	    if ($request->isPost())
 	    {
 	       $data = $request->getPost();
 	       $loginForm->setData($data);
 	       
+	       
 	       if ($loginForm->isValid())
 	       {
     	       $data = $loginForm->getData();
 	           
-    	       $userPassword = new UserPassword();
+    	      //$userPassword = new UserPassword();
+	           //$encyptPass = $userPassword->create($data['pwd']);	           
+
     	       
-	           $encyptPass = $userPassword->create($data['pwd']);
-	           echo "pwd est : " . $data['pwd'] . "<p>";
-	           echo "pwd est : " . $encyptPass . "<p>";
-	           
-	        
-	           
-	           
 	           $this->getAuthService()
 	           ->getAdapter()
 	           ->setIdentity($data['email'])
@@ -49,35 +79,33 @@ class LoginController extends AbstractActionController
 	           
 	           if ($result->isValid())
 	           {
-	               echo "this is valid ". __LINE__ ."<p>";
+	               
+	               $userInfo = $this->userService->findUserByEmail($data['email']);
+	               
 	               $session = new Container("User");
-	               $session->offsetSet('email', $data['email']);
-	               $session->offsetSet('by', 'zenologo');	               
+	               $session->offsetSet('email', $userInfo['email']);
+	               $session->offsetSet('nom', $userInfo['nom']);
+	               $session->offsetSet('vip', $userInfo['vip']);
+	               $session->offsetSet('admin', $userInfo['admin']);
+	               $session->offsetSet('id', $userInfo['id']);
+	               $session->offsetSet('compte', $userInfo['compte']);
 	               
-	               echo "Get session getOffset: " . $session->offsetGet('by') . "<p>";
+	               //$this->flashMessenger()->addMessage(array('success' => 'Login Success'));
+	               //$message
 	               
-	               $this->flashMessenger()->addMessage(array('success' => 'Login Success'));
-	               
-	               $this->redirect()->toUrl('/');
-	           	
+	               if (0 < $userInfo['admin'])
+	               {   
+	                   return $this->redirect()->toUrl("/admin");
+	                   //return array("loginForm" => $loginForm, "error"=>$loginForm->getMessages());
+	               }else{
+	                   $this->redirect()->toUrl('/');
+	               }
 	           }else{
-	               echo "this is not valid ". __LINE__ ."<p>";
-	           	   $this->flashmessenger()->addMessage(array('error' => 'invalid credentials'));
-	           }
-	           
-	           echo "there is  ". __LINE__ . "<p>";
-	           
-	           
-	           return $this->redirect()->toUrl("/");
-	           
-	       }else{
-	           echo "line ". __LINE__ . "<p>";
-	       	   $errors = $loginForm->getMessages();
+	           	   $message = '邮箱和密码不匹配';
+	           }   
 	       }
 	    }
-	    echo "line ". __LINE__ . "<p>";
-	    $view->setVariable('loginForm', $loginForm);  
-	    return $view;
+	    return array("loginForm" => $loginForm, "error"=>$message);
 	}
 	
 	
@@ -90,12 +118,10 @@ class LoginController extends AbstractActionController
 	}
 	
 	public function logoutAction(){
-	    echo "this is logout action";
-	    
 		$session = new Container('User');
 		$session->getManager()->destroy();
 		$this->getAuthService()->clearIdentity();
-		return $this->redirect()->toUrl('/Login/login');
+	    return $this->redirect()->toUrl("/");
 	}
     
     

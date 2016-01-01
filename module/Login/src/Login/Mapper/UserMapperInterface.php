@@ -12,21 +12,36 @@ interface UserMapperInterface
 	 */
     public function find($id);
     
+    public function findUserByEmail($email);
+    
     /**
      * @return array/UserInterface
      */
     public function findAll();
 
 	/**
-		*	@param UserInterface $userObject
-		* @param UserInterface $userObject
-		* @return UserInterface
-		* @throws \Exception
-		*/
-	public function save(UserInterface $userObject);    
+	*	@param UserInterface $userObject
+	* @param UserInterface $userObject
+	* @return UserInterface
+	* @throws \Exception
+	*/
+	public function save($data);    
 		
     public function delete(UserInterface $userObject);
 
-    public function isDuplicateEmail(UserInterface $user);
+    public function isDuplicateEmail($email);
+    
+    public function isAdmin($email);
+    
+    public function findAllAds($id);
+    
+    public function addAdresse($post);
+    
+    public function deleteAdresse($colisId, $userId);
 		
+    public function updateUserInfo($data);
+    
+    public function findAllExpAds($id);
+    
+    public function addExpAdresse($post);
 }

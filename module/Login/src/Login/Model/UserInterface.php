@@ -14,10 +14,6 @@ interface UserInterface
 	 */
 	public function getNom();
 	
-	/**
-	 * Will return user's first name
-	 */
-	public function getPrenom();
 	
 	/**
 	 * Will return user's email.
@@ -28,4 +24,13 @@ interface UserInterface
 	 * Will return user's telephone
 	 */
 	public function getTelephone();
+	
+
+	/**
+	 * @return the $admin
+	 */
+	public function getAdmin();
+	
+	
+	public function getVip();
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+     <title>凭证 - 四通速递</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Le styles -->
+    <link href="/css/express.css" media="all" rel="stylesheet" type="text/css">    
+
+</head>
+<body>
+
+<div id="expediteur">
+    EXPEDITEUR
+    <?php echo "<p>"; echo strtoupper($this->colisInfo->getExpediteurNom());?>
+    <?php echo "<br>"; echo strtoupper($this->colisInfo->getExpediteurAdresse()); ?>
+    <?php echo "<br>"; echo strtoupper($this->colisInfo->getExpediteurCodePostale());?>
+    <?php echo "&nbsp"; echo strtoupper($this->colisInfo->getExpediteurVille()); echo "<p>";?>
+    SITE DE PRISE EN CHARGE <br>
+    MOISSY CRAMAYEL PPDC
+</div>
+
+
+
+<div id="cadre_dest">
+    <div id="dest_contenue">
+        Edité le <?php
+               $date = new DateTime($this->colisInfo->getDepotTime()); 
+            echo $date->format("d/m/Y"); 
+        ?>
+        <p>
+        <div id="sous_ligne"> DESTINATAIRE </div>
+        <p>
+            <?php use Application\Controller\SlsColissimo\Pinyin\Pinyin;?>
+            <?php echo strtoupper(Pinyin::trans($this->colisInfo->getDestinateurNom())); echo "<p>";?>
+            <?php echo strtoupper(Pinyin::trans($this->colisInfo->getDestinateurAdresse())); echo "<p>"; ?>
+            <?php echo strtoupper($this->colisInfo->getDestinateurCodePostale()); echo "&nbsp"; ?>
+            <?php echo strtoupper(Pinyin::trans($this->colisInfo->getDestinateurVille())); echo "<br>"; ?>
+            TEL: <?php echo strtoupper($this->colisInfo->getDestinateurTelephone()); echo "<br>"; ?>
+        <p>
+            N de colis: <?php echo $this->colisInfo->getRefColis(); ?>
+        <p>
+            POIDS <?php echo $this->colisInfo->getPoidsPrevu();?>.00 KG<br><br> 
+            CRBT 0.00 EUR<br><br>
+            Valeur assurance <?php echo $this->colisInfo->getColisAssurance(); ?>.00 EUR
+    </div>
+</div>
+
+<div id="separator_adresse">
+--------------------------------------中文地址请剪下贴在箱子上----------------------------------------------------
+</div>
+
+<div id="dest_chinois">
+           收件人： <?php echo ($this->colisInfo->getDestinateurNom()); echo "<br>";?><br>
+           地址： <?php 
+                    $pays = $this->colisInfo->getDestinateurPay();
+                    if ("Chine" == $pays)
+                    {
+                        echo "中国";   
+                    }else{
+                    	echo $pays;
+                    }
+                    echo "&nbsp"; ?>
+                 <?php echo $this->colisInfo->getDestinateurVille(); echo "&nbsp"; ?> 
+                 <?php echo ($this->colisInfo->getDestinateurAdresse()); echo "<br>"; ?><br>
+           邮编： <?php echo ($this->colisInfo->getDestinateurCodePostale()); echo "<br>"; ?><br>
+           电话： <?php echo ($this->colisInfo->getDestinateurTelephone()); echo "<br>"; ?>
+
+</div>
+
+
+
+
+
+</body>
+</html>

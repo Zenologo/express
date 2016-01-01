@@ -4,13 +4,66 @@
 <?php 
 echo $this->message . "<p>";
 
-$form = $this->form;
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$form = new Form();
 $form->setAttribute('action', $this->url());
-$form->prepare();
+
+
+
+
+$nomElmt = new Element\Text("nom");
+$adresseElmt = new Element\Text("adresse");
+$telephoneElmt = new Element\Text("telephone");
+$payElmt = new Element\Text("pay");
+$emailElmt = new Element\Text("email");
+$pwdElmt = new Element\Password("pwd");
+$submitElmt = new Element\Submit("submit");
+$submitElmt->setValue("提交表单");
+$submitElmt->setAttribute('class', 'login_add_submit');
+
+$form->add($nomElmt);
+$form->add($adresseElmt);
+$form->add($telephoneElmt);
+$form->add($payElmt);
+$form->add($emailElmt);
+$form->add($pwdElmt);
+$form->add($submitElmt);
+
 
 echo $this->form()->openTag($form);
-echo $this->formcollection($form);
-echo $this->form()->closeTag();
-
-
 ?>
+
+    <table id='register_table'>
+        <tr>
+            <td>注册姓名</td>
+            <td><?php echo $this->formElement($nomElmt)?></td>
+       </tr>
+       <tr>
+            <td>注册电话</td>
+            <td><?php echo $this->formElement($telephoneElmt)?></td>
+       </tr> 
+       <tr>
+            <td>详细地址</td>
+            <td><?php echo $this->formElement($adresseElmt)?></td>
+       </tr> 
+       <tr>
+            <td>所在国家</td>
+            <td><?php echo $this->formElement($payElmt)?></td>
+       </tr> 
+       <tr>            
+            <td>注册邮箱</td>
+            <td><?php echo $this->formElement($emailElmt)?></td>
+       </tr>
+       <tr>            
+            <td>注册密码</td>
+            <td><?php echo $this->formElement($pwdElmt)?></td>
+       </tr>
+       
+       <tr>
+            <td colspan='2'><?php echo $this->formElement($submitElmt); ?></td>
+       </tr>
+    </table>
+
+<?php echo $this->form()->closeTag(); ?>

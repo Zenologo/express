@@ -1,0 +1,155 @@
+
+<h1>
+    <?php echo $this->escapehtml("需要出单的包裹")?>
+</h1>
+
+
+
+<?php
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$dateDebutElement = new Element\Text("commande-date-debut");
+$dateDebutElement->setAttribute('id', 'commande-colis-date-debut');
+
+
+$dateFinElement = new Element\Text("commande-date-fin");
+$dateFinElement->setAttribute('id','commande-colis-date-fin');
+
+
+$submitElement = new Element\Submit("submit");
+$submitElement->setValue("查询");
+
+$userForm = new Form();
+$userForm->add($submitElement);
+$userForm->add($dateDebutElement);
+$userForm->add($dateFinElement);
+
+$userForm->prepare();
+?>
+
+
+ 
+ <div class="commande-colis-search">
+    <table>
+        <tr>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th></th>
+        </tr>
+    
+        <tr>
+             <?php echo $this->form()->openTag($userForm); ?>
+                <td> <?php echo $this->formElement($dateDebutElement); ?></td>
+                <td><?php echo $this->formElement($dateFinElement); ?></td>
+                <td><?php echo $this->formelement($submitElement); ?></td>
+            <?php echo $this->form()->closeTag(); ?>
+        </tr>
+    </table>
+</div>
+ 
+ <br>
+ <br>
+
+ <?php 
+
+ $submitElement = new Element\Submit("submitCMD");
+ $submitElement->setValue("出单");
+ //$submitElement->setAttribute('id', '12');
+ 
+ 
+//    $formCmd = new Form();
+//    $formCmd->add($submitElement); 
+    $ss = 0;
+//    $formCmd->setAttribute('action', $this->url('admin/etiquette', array('ref'=>$ss)), true );
+//    $formCmd->prepare();
+
+//    echo $this->form()->openTag($formCmd);
+
+ ?>
+
+ <table id='commande-colis-list' class="display dataTable">
+    <thead> 
+    <tr>
+        <th class='details-control'></th>
+        <th>客户代码</th>
+        <th>客户姓名</th>
+        <th>发件人</th>
+        <th style="display:none">发件人电话</th>
+        <th style="display:none">发件人地址</th>
+        <th style="display:none">发件人城市</th>
+        <th style="display:none">发件人邮编</th>
+
+        <th>收件人</th>
+        <th style="display:none">收件人地址</th>
+        <th style="display:none">收件人城市</th>
+        <th style="display:none">收件人邮编</th>
+        <th style="display:none">收件人电话</th>
+        <th style="display:none">收件人国家</th>
+        <th>包裹估重</th>
+        <th>包裹保险</th>
+        <th>估算邮费</th>
+        <th>下单时间</th>
+        <th>包裹状态</th>
+        <th>帐户余额</th>
+        <th>出单操作</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+     
+    <?php foreach ($this->allColisInfo as $colis): ?>
+    <?php $v = 1;?>
+    <tr>
+        <td class="details-control"></td>
+        <td id="ref" ><?php echo $this->escapeHtml($colis['ref']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['nom']); ?></td>
+        
+        <td><?php echo $this->escapeHtml($colis['expediteurNom']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurTelephone']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurAdresse']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurVille']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['expediteurCodePostale']); ?></td>
+
+        
+        
+        <td><?php echo $this->escapeHtml($colis['destinateurNom']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurAdresse']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurVille']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurCodePostale']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurTelephone']); ?></td>
+        <td style="display:none"><?php echo $this->escapeHtml($colis['destinateurPay']); ?></td>
+        
+        <td><?php echo $this->escapeHtml($colis['poidsPrevu']); ?></td>
+        <td><?php echo $this->escapehtml($colis['colisAssurance']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['prixPrevu']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['depotTime']); ?></td>
+        <td><?php echo $this->escapeHtml($colis['state']); ?></td>
+        <td><?php echo $this->escapeHtml("帐户余额"); ?></td>
+        
+        <td>  <a href="<?php echo $this->url("admin/etiquette",
+	           array('action'=>'etiquette', 'ref'=>$colis['id'])); ?>">下单</a>
+        </td>
+
+   </tr>
+   <?php endforeach;?>
+   
+    <?php // echo $this->form()->closeTag(); ?>
+     </tbody>
+ </table>
+
+
+
+
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+ 
+

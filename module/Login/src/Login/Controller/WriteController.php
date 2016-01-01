@@ -6,7 +6,6 @@ use Login\Service\UserServiceInterface;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Session\Container;
 
 class WriteController extends AbstractActionController
 {
@@ -27,19 +26,17 @@ class WriteController extends AbstractActionController
 	    
 	    if ($request->isPost())
 	    {
-	        $this->userForm->setData($request->getPost());
-   
-	        
-			if ($this->userForm->isValid() && 
-			     !$this->userService->isDuplicateEmail($this->userForm->getData()))
+	        $postData = $request->getPost();
+	             
+			if (!$this->userService->isDuplicateEmail($postData['email']))
 			{
 				try{
-						$this->userService->saveUser($this->userForm->getData());						
+						$this->userService->saveUser($postData);
 						
 						return $this->redirect()->toRoute('application');
 				} catch(\Exception $e)
 				{
-						echo "Some Data Base Error";	
+						echo "Some Data Base Error " . $e->getMessage();
 						die();
 				}
 			} else {
@@ -47,7 +44,7 @@ class WriteController extends AbstractActionController
 			}
 	    }
 	    
-        return (array('form' => $this->userForm, 'message' => $msg));
+        return (array('message' => $msg));
 	}
 	
 	

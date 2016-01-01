@@ -1,0 +1,56 @@
+<h1><?php echo $this->escapeHtml("查看所有客户介面");?></h1>
+
+
+<?php 
+if ($this->flashMessenger()->hasMessages()) {
+	$messages = $this->flashMessenger()->getMessages();
+	
+	foreach($messages as $message) {
+	   if ($message == 'ok')
+	   {
+	       echo"<script>alert('密码已经重置为：123');</script>";
+	   }
+	}
+}
+?>
+
+<table id='all_users'>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>邮箱</th>
+        <th>重置密码</th>
+        <th>会员等级</th>
+        <th>余额</th>
+        <th>操作</th>
+    </tr>
+    <?php foreach ($this->allUsers as $user): ?>  
+    <tr>
+        <td><?php echo $this->escapehtml($user->getRef());?></td>
+        <td><?php echo $this->escapehtml($user->getNom());?></td>
+        <td><?php echo $this->escapehtml($user->getTelephone());?></td>
+        <td><?php echo $this->escapehtml($user->getEmail());?></td>
+        <td><a href="<?php echo $this->url("admin/resetpwd",
+	           array('action'=>'resetpwd', 'id'=>$user->getId())); ?>">密码重置</a></td>
+        <td><?php 
+            $vip = $user->getVip();
+            if ($vip == 1){
+            	echo $this->escapehtml("普通会员");
+            } else if ($vip == 2){
+            	echo $this->escapehtml("白金会员");
+            }else{
+            	echo $this->escapehtml("普通客户");
+            }
+        ?></td>
+        <td><?php echo $this->escapehtml($user->getCompte());?></td>
+        <td>
+            <a href="<?php echo $this->url("admin/recharge",
+	           array('action'=>'recharge', 'id'=>$user->getId())); ?>">充值</a>
+        
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+

@@ -31,11 +31,8 @@ class RegistColisController extends AbstractActionController
 	       {
     	       $data = $loginForm->getData();
 	           
-    	       $userPassword = new UserPassword();
-    	       
-	           $encyptPass = $userPassword->create($data['pwd']);
-	           echo "pwd est : " . $data['pwd'] . "<p>";
-	           echo "pwd est : " . $encyptPass . "<p>";
+//    	       $userPassword = new UserPassword();  	       
+//	           $encyptPass = $userPassword->create($data['pwd']);
 	           
 	        
 	           

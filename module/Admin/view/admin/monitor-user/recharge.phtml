@@ -1,0 +1,56 @@
+
+<h1><?php $this->escapeHtml("会员充值");?></h1>
+
+<?php
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+$textElement = new Element\Text("montant");
+$buttonElement = new Element\Submit("recharge-button");
+$buttonElement->setValue("余额充值");
+
+$userForm = new Form();
+$userForm->add($buttonElement);
+$userForm->add($textElement);
+
+$userForm->setAttribute('action', $this->url('admin/recharge', array('montant' => $textElement->getValue()), true));
+
+$userForm->prepare();
+
+//$this->formElement($textElement)
+?>
+
+<table>
+    <tr>
+        <th>客户编号</th>
+        <th>客户姓名</th>
+        <th>客户邮箱</th>
+        <th>会员等级</th>
+        <th>帐户余额</th>
+        <th>充值金额(负数为应减金额)</th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <th><?php echo $this->user->getId() ?></th>
+        <th><?php echo $this->user->getNom() ?></th>
+        <th><?php echo $this->user->getEmail() ?></th>
+        <th><?php 
+            $vip = $this->user->getVip();
+            if ($vip == 1){
+            	echo $this->escapehtml("普通会员");
+            } else if ($vip == 2){
+            	echo $this->escapehtml("白金会员");
+            }else{
+            	echo $this->escapehtml("普通客户");
+            }
+        ?></th>
+        <th style="color: red"><?php echo $this->user->getCompte() ?></th>
+        <?php echo $this->form()->openTag($userForm); ?>
+        <th><?php echo $this->formElement($textElement); ?></th>
+        <th><?php echo $this->formElement($buttonElement); ?></th>
+        <?php echo $this->form()->closeTag(); ?>
+    </tr>
+</table>
+
+

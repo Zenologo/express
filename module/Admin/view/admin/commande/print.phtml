@@ -1,0 +1,109 @@
+
+
+<p>
+</p>
+<h1 align="center">快递委托代理书</h1>
+<table id="print_table_border"  style="font-size:20px">
+    <tr>
+        <td>姓名：<?php echo $this->colisInfo[0]['nom']?>  </td>
+        <td>电话: <?php echo $this->colisInfo[0]['telephone']?> </td>
+        <td>会员号: <?php echo $this->colisInfo[0]['ref']?></td>
+        <td>打印日期： <?php echo date("Y-m-d");?></td>
+    </tr>
+    <tr>
+        <td colspan="2">发件人: <?php echo $this->colisInfo[0]['expediteurNom']; ?></td>
+        <td colspan="2">收件人: <?php echo $this->colisInfo[0]['destinateurNom']; ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <br></td>
+    <tr>
+        <td colspan="4">委托四通快递承运国际出境快件：</td>
+    </tr>
+    <tr>
+        <td colspan="4">1. 严格按照活着规定，如实准确申报出境物品名称，数量及金额，保证货品和下单文件相符并对此承担相应法律责任。</td>
+    </tr>
+    <tr>
+        <td colspan="4">2. 此委托书一经签字即为具有法律效力的委托合同，有效期截至到 2015/12/31</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <?php $LIGNE = 100; 
+            for ($i = 0; $i < $LIGNE; $i++){
+            	echo "-";
+            } ?> 
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>姓名：<?php echo $this->colisInfo[0]['nom']?>  </td>
+        <td>电话: <?php echo $this->colisInfo[0]['telephone']?> </td>
+        <td>会员号: <?php echo $this->colisInfo[0]['ref']?></td>
+        <td>打印日期： <?php echo date("Y-m-d");?></td>
+    </tr>
+    <tr>
+        <td colspan="2">发件人: <?php echo $this->colisInfo[0]['expediteurNom']; ?></td>
+        <td colspan="2">收件人: <?php echo $this->colisInfo[0]['destinateurNom']; ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <br></td>
+    <tr>
+        <td colspan="4">委托四通快递承运国际出境快件：</td>
+    </tr>
+    <tr>
+        <td colspan="4">1. 严格按照活着规定，如实准确申报出境物品名称，数量及金额，保证货品和下单文件相符并对此承担相应法律责任。</td>
+    </tr>
+    <tr>
+        <td colspan="4">2. 此委托书一经签字即为具有法律效力的委托合同，有效期截至到 2015/12/31</td>
+    </tr>
+    
+    
+    <tr>
+        <td colspan="4"> <br>
+           <?php for ($i = 0; $i < $LIGNE; $i++){
+            	echo "-";
+            } ?> 
+        
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table class="print_destinateurInfo">
+            <tr><td colspan="2">收件人:  <?php echo $this->colisInfo[0]['destinateurNom'];?></td>
+            </tr>
+            <tr>
+                <td colspan="2">收件人地址： <?php echo $this->colisInfo[0]['destinateurAdresse']?></td>
+            </tr>
+            <tr>
+            <td>城市： <?php echo $this->colisInfo[0]['destinateurVille']?></td>
+            <td>邮编： <?php echo $this->colisInfo[0]['destinateurCodePostale']?></td>
+            </tr>
+            <tr>
+                <td colspan="2">电话:  <?php echo $this->colisInfo[0]['destinateurTelephone'];?></td>
+            </tr>
+            </table>
+        </td>
+        <td colspan="2">             
+            <table class="print_destinateurInfo">
+            <tr><td colspan="2">收件人:  <?php echo $this->colisInfo[0]['destinateurNom'];?></td>
+            </tr>
+            <tr>
+                <td colspan="2">收件人地址： <?php echo $this->colisInfo[0]['destinateurAdresse']?></td>
+            </tr>
+            <tr>
+            <td>城市： <?php echo $this->colisInfo[0]['destinateurVille']?></td>
+            <td>邮编： <?php echo $this->colisInfo[0]['destinateurCodePostale']?></td>
+            </tr>
+            <tr>
+                <td colspan="2">电话:  <?php echo $this->colisInfo[0]['destinateurTelephone'];?></td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"> <br></td>
+    </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>

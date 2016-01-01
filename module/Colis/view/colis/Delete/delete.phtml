@@ -1,0 +1,11 @@
+use Zend\Db\Sql\Delete;
+
+<h1>DeleteController::deleteAction</h1>
+<p>
+    Are you sure that you want to Delet ?    
+</p>
+
+<form action="<?php echo $this->url('colis/delete', array(), true) ?>" method="post">
+    <input type="submit" name="delete_confirmation" value="yes">
+    <input type="submit" name="delete_confirmation" value="no">
+</form>

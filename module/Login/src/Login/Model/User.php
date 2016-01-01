@@ -10,18 +10,12 @@ class User implements UserInterface
      */
     protected $id;
     
-    
     /**
      * 
      * @var string
      */
     protected $nom;
     
-    /**
-     * 
-     * @var string
-     */
-    protected $prenom;
     
     /**
      * 
@@ -42,8 +36,14 @@ class User implements UserInterface
     
     protected $adresse;
     
+    protected $admin;
+    
+    protected  $vip;
     
     
+    
+
+
 	/** (non-PHPdoc)
 	 * @see \Login\Model\UserInterface::getId()
 	 */
@@ -75,20 +75,6 @@ class User implements UserInterface
 		$this->nom = $nom;
 	}
 
-	/**
-	 * @param string $prenom
-	 */
-	public function setPrenom($prenom) {
-		$this->prenom = $prenom;
-	}
-
-	/**
-	 *{@inheritDoc} 
-	 * @see \Login\Model\UserInterface::getPrenom()
-	 */
-	public function getPrenom() {
-		return $this->prenom;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -118,7 +104,8 @@ class User implements UserInterface
 	/**
 	 * @param string $email
 	 */
-	public function setEmail($email) {
+	public function setEmail($email) 
+	{
 		$this->email = $email;
 	}
 
@@ -152,5 +139,37 @@ class User implements UserInterface
 	{
 		$this->pwd = $pwd;
 	}
+	
+
+	/**
+	 * @return the $admin
+	 */
+	public function getAdmin() {
+		return $this->admin;
+	}
+	
+	/**
+	 * @param field_type $admin
+	 */
+	public function setAdmin($admin) {
+		$this->admin = $admin;
+	}
+	/**
+	 * @return the $vip
+	 */
+	public function getVip() {
+		return $this->vip;
+	}
+
+	/**
+	 * @param field_type $vip
+	 */
+	public function setVip($vip) {
+		$this->vip = $vip;
+	}
+
+	
+	
+	
 	
 }

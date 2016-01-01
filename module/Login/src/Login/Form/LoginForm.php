@@ -2,9 +2,6 @@
 namespace Login\Form;
 
 use Zend\Form\Form;
-use Zend\Form\Element;
-use Zend\Element\Csrf;
-
 
 class LoginForm extends Form
 {
@@ -17,7 +14,7 @@ class LoginForm extends Form
 			'name' => 'email',
 		    'type' => 'text',
 		    'options' => array(
-			    'label' => 'Email',
+			    'label' => '邮箱',
 		        'id' => 'email',
 		        'placeholder' => 'example@google.com'
 		)
@@ -27,7 +24,7 @@ class LoginForm extends Form
 	   	   'name' => 'pwd',
 	       'type' => 'password',
 	       'options' => array(
-	       	   'label' => 'Password',
+	       	   'label' => '密码',
 	           'id' => 'pwd',
 	           'placeholder' => '*************'
 	       )
@@ -47,7 +44,7 @@ class LoginForm extends Form
 	   	   'name' => 'submit',
 	       'attributes' => array(
 	   	       'type' => 'submit',
-	           'value' => 'Submit',
+	           'value' => '提交',
 	       ),
 	   ));
 	}    

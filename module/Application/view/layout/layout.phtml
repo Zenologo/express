@@ -3,31 +3,49 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('四通速递')->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
-                       // ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/express.css')
+                        ->prependStylesheet($this->basePath() . '/css/jquery.steps.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
-                        ->prependStylesheet($this->basepath() . '/css/main.css?v=2015-07-04_12')?>
+                        ->prependStylesheet($this->basepath() . '/js/jquery-ui-1.11.4/jquery-ui.min.css')
+                        ->prependStylesheet($this->basepath() . '/css/jquery.dataTables.min.css')
+                        ->prependStylesheet($this->basepath() . '/css/main.css?v=2015-07-04_12')
+        ?>
 
 
         
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js') 
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js')
-                                    ->prependFile($this->basepath() . '/js/modernizr.js')
-                                    ->prependFile($this->basepath() . '/js/modernizr.js')
+                                      ->prependFile($this->basePath() . '/js/PluginsDataTables/api/sum().js')
+                                      ->prependFile($this->basepath() . '/js/jquery.dataTables.min.js')
+                                      
+                                               
+                                      ->prependFile($this->basepath() . '/js/modernizr.js')
+                                      ->prependFile($this->basepath() . '/js/express.js')
+                                      ->prependFile($this->basepath() . '/js/jquery.steps.min.js')
+                                      ->prependFile($this->basepath() . '/js/jquery.validate.min.js')
+                                      ->prependFile($this->basepath() . '/js/jquery-ui-1.11.4/jquery-ui.min.js')
+                                      //->prependFile($this->basePath() . '/js/jquery.min.js')
+
+        
+         
+                                     ->prependFile($this->basePath() . '/js/jquery-easyui-1/jquery.easyui.min.js')
+                                      ->prependFile($this->basePath() . '/js/jquery-ui-1.11.4/external/jquery/jquery1.11.js')
+                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+
         ?>
                                       
-       <script type="text/javascript" charset="utf-8"  data-requirecontext="_" data-requiremodule="/js/main.js?v=2015-07-04_12" src="/js/main.js?v=2015-07-04_12">
-
-      </script>
-
+       <script type="text/javascript" charset="utf-8"  data-requirecontext="_" data-requiremodule="/js/main.js?v=2015-07-04_12" src="/js/main.js?v=2015-07-04_12"></script>
+ 
+     <!--  <script type="text/javascript" src="/js/express.js" ></script> -->
+              
+       
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta charset="utf-8">
   <meta name="renderer" content="webkit">
@@ -50,7 +68,6 @@
     </script>
     
     <![endif]-->
-      <title>测试版本01</title>
       <meta name="description" content="">
       <meta name="keywords" content="">
       <meta name="viewport" content="width=device-width">
@@ -80,8 +97,8 @@
              var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
              var bIsIE = sUserAgent.match(/iemobile/i) == "iemobile";
              if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM||bIsIE) {
-                var current_uri='/cn/sc/index.html';
-                var current_folder='/cn/sc/';
+                //var current_uri='/cn/sc/index.html';
+                //var current_folder='/cn/sc/';
                  if(url.indexOf('#search/bill-number')>-1){
                  window.location.href='../../mobile/cn/sc/dynamic_functions/waybill/waybill_query_by_billno.html';
                  }else if(url.indexOf('#search/phone-number')>-1){
@@ -111,20 +128,24 @@
                     <?php  
                         $session = new Zend\Session\Container("User");
                     
-                        $nom = $session->offsetGet('email');
-                    
+                        $nom = $session->offsetGet('nom');
+                        $admin = $session->offsetGet('admin');
+                        
                         if ($nom != "")
                         {
 
-                            echo "<li class='login'>" .  $nom . " Bientenue";
+                            echo "<li class='login'>" .  $nom . " ";
+                            echo "</li>";
+                            echo "<li class='login'>";
+                            echo "<a href='/login/logout'>退出</a>";
                             echo "</li>";
                             echo "</ul>";
                         }else{
                             echo "<li class='login'>";
-                            echo "<a target=\"_blank\" href=\"login\">登录</a>";
+                            echo "<a href='/login'>登录</a>";
                             echo "</li>";
                             echo "<li class=\"register\">";
-                            echo "<a target=\"_blank\" href=\"/login/add\">注册</a>";
+                            echo "<a href='/login/add'>注册</a>";
                             echo "</li>";
                         }
                     
@@ -132,300 +153,96 @@
           </ul>
                   
           <div id="channel_link_list" >
-        
-        
-        
-        
         	<ul class="channels">
-        	   
-        	   	  
-        			
-        		 <li>
-        			
-        				
-        				
+        		 <li>	
         					<a href="/">首页</a>
-        				
-        			
         		  </li>
-        		
-        	   	  
-        			
        		 <li>
-					<a href="/aboutme">关于顺丰</a>
+					<a href="/aboutme">关于四通</a>
        		  </li>
            </ul>
-        
-        
         </div>
-          
-            
             <a class='logo go-root' href='#'>
-              
-                <img src="/images/sfexpress/logoSC.png" />
-              
+                <img src="/images/sfexpress/logoSC.png" />              
             </a>
-          
           </div>
     </header>
-
+    
     <div id="main_navgation">
         <nav class="navigation">
             <ul class="container">
-                <li class="main-navigation-item first private"> <!--第一个超级菜单加 first、private 这个类-->			
-                    <div class="main-navigation-title">
-					   <span>寄件</span>
-						<span class="connector"></span>
-					</div>
-							
-	                <div class="mega-menu sending">
-                        <div class="column first">
-                            <div class="title">我要寄件</div>
-                            <div class="service-location-inputs location-inputs mini-inputs" data-redirect="true">
-                    <dl>
-                        <dt>从</dt>
-                        <dd class="detail-location-input origin-price" data-do-save-state="true" data-do-restore-state="true" data-max-level="3">
-                            <div class="input-group">
-                                <input type="text" class="form-control origins no-right-border autocomplete readonly ui-autocomplete-input" readonly="readonly" placeholder="请选择原寄地地区" autocomplete="off">
-                                <span class="input-group-addon no-left-border"><span class="sfi sfi-dot"></span></span>
-                            </div>
-                        <div class="detail-location-picker toggle-plugins"></div></dd>
-                    </dl>
-                    <dl>
-                        <dt>到</dt>
-                        <dd class="detail-location-input dest-price" data-max-level="3">
-                            <div class="input-group">
-                                <input type="text" class="form-control readonly dests no-right-border autocomplete readonly ui-autocomplete-input" readonly="readonly" placeholder="请选择目的地地区" disabled="disabled" autocomplete="off">
-                                <span class="input-group-addon no-left-border"><span class="sfi sfi-dot"></span></span>
-                            </div>
-                        <div class="detail-location-picker toggle-plugins"></div></dd>
-                    </dl>
-                    <button type="button" class="primary-button disabled" data-loading-text="查询中...">
-                        查运费
-                    </button>
-                    
-                        
-                            
-                                
-                                    <span class="sending-at-once go-dynamic">
-                                <a href="../../../../dynamic_functions/order/" target="">
-                                    
-                                        <img src="/images/sfexpress/order-button-icon.gif">
-                                    
-                                    马上寄件
-                                </a></span>
-                                
-                                <div>
-                                    <a class="coverage-query" href="../../../../dynamic_functions/range/" target="">
-                                        收寄范围查询&gt;&gt;
-                                    </a>
-                                </div>
-                            
-                        
-                    
-                </div>
-            
-        </div>
-        <div class="column">
-            
-                
-                
-                    <div class="second-column" style="float:right;width:115px;">
-                    
-                    <div class="title">
-                        寄件自助工具
-                    </div>
-                    
-                        <img class="additional-image" src="/images/sfexpress/QR-code.png">
-                    
-                    <ul>
-                        
-                            <li>
-                                <a href="../../../../deliver/deliver_tool/order_by_wechat/" target="">
-                                    微信下单 方便快捷
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="../../../../deliver/deliver_tool/sf_tool/SF_APP/" target="">
-                                    速运通客户端
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="../../../../deliver/deliver_tool/Vip_Rule/" target="">
-                                    大客户发件工具
-                                </a>
-                            </li>
-                        
-                    </ul>
-        </div>
-        
-                    
-                    <div class="second-column" style="width:115px;">
-                    <div class="title">
-                        寄件方式
-                    </div>
-                    
-                    <ul>
-                            <li>
-                                <a href="../../../../deliver/deliver_way/Door_to_Door_Service/" target="">
-                                    免费预约上门取件
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="../../../../deliver/deliver_way/Pickup_by_Self/introduce/" target="">
-                                    服务点自寄自取
-                                </a>
-                            </li>
-                        
-                    </ul>
-        </div>
-        
-                    
-                    <div class="second-column" style="width:115px;">
-                    <div class="title">
-                        附加费
-                    </div>
-                    
-                    <ul>
-                        
-                            <li>
-                                <a href="../../../../deliver/surcharge/hk_surcharge/" target="">
-                                    香港非工商附加费
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="../../../../deliver/surcharge/Overweight/" target="">
-                                    超长超重附加费
-                                </a>
-                            </li>
-                        
-                            <li>
-                                <a href="../../../../deliver/surcharge/Remote_Area/" target="">
-                                    大陆偏远附加费
-                                </a>
-                            </li>
-                        
-                    </ul>
-        </div>
-        
-        
-    </div>
-    <div class="column ads">
-        
-            
-            
-                <a href="http://www.sfbest.com/html/activity/1435282557.html" target="_blank">
-                    
-                        <img src="/images/sfexpress/chihuo_shipping_sc.jpg">
-                    
-                </a>
-            
-                <a href="../../../../express/sf_cold_chain/pharma_ease/cold_chain_main_line_transportation/" target="_blank">
-                    
-                        <img src="/images/sfexpress/95338-8-1-shipping-sc.jpg">
-                    
-                </a>
-            
-        
-    </div>
-    </div>
- 
-							
-						</li>
-						
-						
-					
-				
-					
-						
-							
-								
-								
-	   <li class="main-navigation-item private"> <!--前两个个超级菜单加 private 这个类-->		
-			<div class="main-navigation-title">
-				<span>会员</span>
-				<span class="connector"></span>
-			</div>
 
-            <div class="mega-menu member">
-            	
-            	<div class="column first">
-        			
-        			<div class="how-to">
-        					<img src="/images/sfexpress/question.png">
-        				<a href="/login/introduction" target="_blank">
-        					如何成为个人会员
-        				</a>
+                <li class='main-navigation-item first private'>
+                    <!--第一个超级菜单加 first、private 这个类-->
+                    <div class='main-navigation-title'>				           
+                        <span><?php if(0 < $admin){echo "包裹管理";}else{echo "邮寄包裹";} ?></span>
+                        <span class="connector"></span>	       
+                    </div>
+
+                    <div class="mega-menu member">
+                        <div class="column first">
+                             <div class="service-location-inputs location-inputs mini-inputs" data-redirect="true">
+                                <div class='member-login-signup clearfix'>                                                    
+                                 <!-- <span class="sending-at-once go-dynamic"> -->
+                                    <?php
+                                        if (0 < $admin){
+                                            echo "<a href='/admin' target=''><img src='/images/sfexpress/order-button-icon.gif' />查看包裹清单</a>";
+                                        }else if ($nom != null){
+                                            echo "<div class='member-login-signup clearfix'>";
+                                            echo "<a class='member-login' href='/colis/add' target=''>马上下单</a>";
+                                            echo "<a class='member-login' href='/colis' target=''>包裹清单</a>";
+                                            echo "<a class='member-login' href='/login/listads'>收件人地址管理</a>";
+                                            echo "<a class='member-login' href='/login/listexpads'>发件人地址管理</a>";
+                                            echo "<a class='member-login' href='/login/modif'>修改基本信息</a>";
+                                            
+                                        }else if ($nom == null){
+                                        	echo "<div class='member-login-signup clearfix'>";
+                                        	echo "<a class='member-login' href='/colis/add' target=''>马上下单</a>";
+                                        }                                        
+                                    ?>
+                                 <!--  </span>  -->                                
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+	            </li>
+								
+        								
+        	   <li class="main-navigation-item private"> <!--前两个个超级菜单加 private 这个类-->		
+        			<div class="main-navigation-title">
+        				<span><?php if (0 < $admin) 
+        				                echo "会员管理"; 
+        				            echo "会员"; ?>
+        				</span>
+        				<span class="connector"></span>
         			</div>
-        			
-        			<div class="title">
-        				个人会员
-        			</div> 
-            			
-        			<div class="member-login-signup clearfix">
-        					<a class="member-login" href="/login" target="_blank">
-        							<img src="/images/sfexpress/login.png">
-        						登录
-        					</a>
-        				
-        					<a class="member-login" href="login/add" target="_blank">	
-        							<img src="/images/sfexpress/signup.png">
-        						注册
-        					</a>
-        			</div>
-        			
-            	</div>
-            </div> 				
-		</li>
-						
-						
-					
-				
-					
-						
-					
-						
-						
-						
-					
-				
-					
-						
-							
-								
-								
-				
-					
-						
-							
-								
-								
-								
-						
-						<!-- 
-							<li class="main-navigation-link-item private">
-								
-								
-								<a href="http://www.sfbest.com/?union_source=sfexpress&amp;union_medium=sfyx&amp;union_campaign=sfyx&amp;utm_source=sfexpress&amp;utm_medium=sfyx&amp;utm_campaign=sfyx" class="main-navigation-title" target="_blank">
-									顺丰优选
-								</a>
-							</li>
-						
-					
-				 -->
-			
-			
-				<li class="main-navigation-link-item extra">
-				    
-					
-					<a href="../../../../promotions/" target="_blank" class="main-navigation-title">
-						代发专区<img class="default" src="/images/sfexpress/promotion_cn.png">
-					</a>
-				</li>
+        
+                    <div class="mega-menu member">
+                    	
+                    	<div class="column first">
+                			<?php 
+                			if (0 == $admin){
+                			     echo "<div class='how-to'>";
+                				 echo   "<img src='/images/sfexpress/question.png'><a href='/login/introduction'>如何成为个人会员</a>";
+                			     echo "</div>";
+                			     
+                			     echo "<div class='title'>个人会员</div>";
+                			     
+                			     echo "<div class='member-login-signup clearfix'>";
+                			     echo    "<a class='member-login' href='/login' target='_blank'><img src='/images/sfexpress/login.png'>登录</a>";
+                			     echo    "<a class='member-login' href='login/add' target='_blank'><img src='/images/sfexpress/signup.png'>注册</a>";
+                			     echo "</div>";
+                			}else{
+                				echo "<div class='member-login-signup clearfix'>";
+                                echo    "<a class='member-login' href='/admin/user'><img src='/images/sfexpress/signup.png'>会员充值</a>";
+                                echo "</div>";
+                			}
+                			?>
+                			
+                    	</div>
+                    </div> 				
+        		</li>	
+
 		</ul>
 	</nav>
 </div>
@@ -436,11 +253,7 @@
     
             <!-- // zend container  -->   
         <div class="">
-            <?php echo $this->content; ?>
-            
-            
-            <hr>
-  
+            <?php echo $this->content; ?> 
         </div> <!-- /container -->
         
         
@@ -451,347 +264,27 @@
     
     <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    
-                        
-                        <ul class="frequent-categories">
-                            
-                        
-                            
-                                <li class="frequent-category">
-                                    <span>服务（产品）</span>
-                                    <ul class="frequent-links">
-                                        
-                                        
-                                    </ul>
-                                </li>
-                            
-
-                            
-                                <li class="frequent-category">
-                                    <span>自助工具</span>
-                                    <ul class="frequent-links">
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                    
-                                                        <a href="deliver/deliver_tool/order_by_wechat/">顺丰微信公众号</a>
-                                                    
-                                                
-                                            </li>
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                    
-                                                        <a href="deliver/deliver_tool/sf_tool/SF_APP/">速运通 APP</a>
-                                                    
-                                                
-                                            </li>
-                                        
-                                    </ul>
-                                </li>
-                            
-                                <li class="frequent-category">
-                                    <span>集团</span>
-                                    <ul class="frequent-links">
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                    
-                                                        <a href="others/about/overview/">顺丰概况</a>
-                                                    
-                                                
-                                            </li>
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                    
-                                                        <a href="others/about/expanding/">服务网络</a>
-                                                    
-                                                
-                                            </li>
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                        <a href="http://www.sf-airlines.com/sfa/zh/index.html" target="_blank">顺丰航空</a>
-                                                    
-                                                    
-                                                
-                                            </li>
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                        <a href="http://hr.sf-express.com/" target="_blank">人才招聘</a>
-                                                    
-                                                    
-                                                
-                                            </li>
-                                        
-                                            
-                                            
-                                            <li>
-                                                
-                                                    
-                                                    
-                                                        <a href="others/about/citizen/">顺丰慈善</a>
-                                                    
-                                                
-                                            </li>
-                                        
-                                    </ul>
-                                </li>
-                            
-                        </ul>
-                    
-                </div>
-                
-                    
-                        <div class="col-md-3">
-                            <div class="info">
-                                <div class="info-title">
-                                    客服专线
-                                </div>
-                                
-                                    
-                                        <img src="/images/sfexpress/service-phone.png" class="info-number">
-                                    
-                                    
-                                
-                            </div>
-                            <div class="info qr">
-                                <div class="info-title">
-                                    微信客服
-                                </div>
-                                <div class="info-content">
-                                    <img src="/images/sfexpress/QR-code.png">
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="info-title">
-                                    官方微博
-                                </div>
-                                <div class="info-weibo">
-                                    <a target="_blank" href="http://weibo.com/2105779990" class="sina">@顺丰官方微博</a>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    
-                    
-                    
-                
-            </div>
-
             <div class="footer-links">
-
-                <div id="footer_link_list">
-
-
-
-
-		<ul>
-			
-				
-				
-				<li>
-					
-						
-						
-							<a href="others/about/overview/">关于顺丰</a>
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-						
-							<a href="others/about/legal_issues/">使用条款</a>
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-						
-							<a href="others/about/service_hotline/">联系我们</a>
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-							<a href="http://hr.sf-express.com/" target="_blank">人才招聘</a>
-						
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-							<a href="https://open.sf-express.com" target="_blank">开放平台</a>
-						
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-							<a href="http://www.sfb2c.com/" target="_blank">跨境电商服务</a>
-						
-						
-					
-				</li>
-				
-					<span class="seperator">|</span>
-				
-			
-				
-				
-				<li>
-					
-						
-						
-							<a href="others/Procurement_info/Policies/">采购信息</a>
-						
-					
-				</li>
-				
-			
-		</ul>
-</div>
-
-                <div class="record-number"><a target="_blank" style="color: #333;" href="http://www.miitbeian.gov.cn">粤ICP备08034243号</a></div>
-                <div class="copy-right">© 2014 顺丰速运 版权所有</div>
-            </div>
-
-
-            <div class="extra-links">
-                <a href="https://ss.cnnic.cn/verifyseal.dll?sn=2011012800100006431&amp;ct=df&amp;pa=632381" target="_blank" id="cnnic-link">
-                    <img src="/images/sfexpress/cnnic.png">
-                </a>
-                <a href="http://www.sznet110.gov.cn/webrecord/innernet/Welcome.jsp?bano=4403101900826" target="_blank">
-                    <img src="/images/sfexpress/security_site_1.png">
-                </a>
-                <a href="http://www.sznet110.gov.cn/index.jsp" target="_blank">
-                    <img src="/images/sfexpress/security_site_2.png">
-                </a>
+                <div id="footer_link_list"></div>
+                <div class="record-number"></div>
+                <div class="copy-right">© 2015 四通速运 版权所有</div>
             </div>
         </div>
     </footer>
-    
-    
+
+            <!-- build:js scripts/main.js -->
 
 
-    <!-- build:js scripts/main.js -->
-    <script data-main="/js/main.js?v=2015-07-04_12" src="/js/require.js"></script>    
-    <script> require.config({ waitSeconds: 0 }); </script>
-    <!-- endbuild -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?32464c62d48217432782c817b1ae58ce";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
+
+<script data-main="/js/main.js?v=2015-08-09_12"
+        src="/js/require.js"></script>
+<script>
+    require.config({
+        waitSeconds: 0
+    });
 </script>
-    
-    
-    
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-        var rg = "cn";
-        if("cn"==rg){
-            ga('create', 'UA-33802207-8', 'sf-express.com');
-        }else if("hk"==rg){
-            ga('create', 'UA-33802207-11', 'sf-express.com');
-        }else if("tw"==rg){
-            ga('create', 'UA-33802207-12', 'sf-express.com');
-        }else if("ru"==rg){
-            ga('create', 'UA-33802207-13', 'sf-express.com');
-        }else if("sg"==rg){
-            ga('create', 'UA-33802207-14', 'sf-express.com');
-        }else if("my"==rg){
-            ga('create', 'UA-33802207-15', 'sf-express.com');
-        }else if("jp"==rg){
-            ga('create', 'UA-33802207-16', 'sf-express.com');
-        }else if("kr"==rg){
-            ga('create', 'UA-33802207-17', 'sf-express.com');
-        }else if("us"==rg){
-            ga('create', 'UA-33802207-18', 'sf-express.com');
-        }
-    
-        ga('send', 'pageview');
+<!-- endbuild -->
 
-    </script>
-    <span style="position:absolute; top:-999px; left:0; white-space:pre;"></span>
-    
-<div class="right-bottom-float weixin" style="display: none;"><div class="layer-header"><a class="layer-close" title="关闭">关闭</a></div>
-<div class="layer-content"><div class="layer-img"><img src="/images/sfexpress/sf-weixin-qr-code110-110.png"></div>
-<div class="layer-intro">扫描二维码<br>关注顺丰微信</div></div></div>    
-    
-    <div class="right-bottom-float tip" style="display: none;"><div class="layer-header"><a class="layer-close" title="关闭">关闭</a></div>
-    <div class="layer-content"><div class="layer-img"><img src="/images/sfexpress/LABA.png"></div>
-    <div class="layer-intro">关于冒充顺丰速运<br>诈骗客户的<br>警示公告</div></div></div>
-    
-    <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul>
-    
-    <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
-    <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul>
-    <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
-    
+
     </body>
 </html>

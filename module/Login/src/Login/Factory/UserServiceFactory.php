@@ -9,7 +9,7 @@ class UserServiceFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-	    echo "b1 <br>";
+	    
 	    
 	   
 		return new UserService($serviceLocator->get('Login\Mapper\UserMapperInterface'));

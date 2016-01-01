@@ -1,0 +1,78 @@
+<h1> 基本信息 </h1>
+
+<?php
+
+
+
+
+
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+
+$user = $this->info;
+
+$idElmt = new Element\Text("id");
+$idElmt->setAttribute("id", "ID");
+
+$nomElmt = new Element\Text("nom");
+$nomElmt->setAttribute("id", "nom");
+
+$telephoneElmt = new Element\Text("telephone");
+$telephoneElmt->setAttribute("id", "telephone");
+
+$pwdElmt = new Element\Password("password");
+$pwdElmt->setAttribute("id", "password");
+
+$checkPwdElmt = new Element\Password("check_password");
+$checkPwdElmt->setAttribute("id", "check_password");
+
+$submitElmt = new Element\Submit("submit");
+$submitElmt->setAttribute('id', 'modif_submit');
+$submitElmt->setValue("提交");
+
+
+$userForm = new Form();
+$userForm->setAttribute('action', $this->url('login/modif', array()), true);
+$userForm->add($idElmt);
+$userForm->add($nomElmt);
+$userForm->add($telephoneElmt);
+$userForm->add($pwdElmt);
+$userForm->add($checkPwdElmt);
+$userForm->add($submitElmt);
+$telephoneElmt->setValue($this->info->getTelephone());
+
+$userForm->prepare();
+echo $this->form()->openTag($userForm);
+
+$idElmt->setValue($this->info->getId());
+?>
+
+<table id='user_info' class='user_info'>
+
+        <tr  style="display: none;">
+            <td></td>
+            <td><?php echo $this->form_row($idElmt); ?> </td>
+        </tr>
+        <tr>
+            <td>用户名</td>
+            <td> <?php echo $this->info->getNom(); ?> </td>
+        </tr>
+         <tr>   
+            <td>电话</td>
+            <td> <?php echo $this->formelement($telephoneElmt); ?> </td>            
+         </tr>
+         <tr>
+            <td>新密码</td>
+            <td><?php echo $this->formelement($pwdElmt); ?></td>
+         </tr>
+         <tr>
+            <td>确认密码</td>
+            <td><?php echo $this->formelement($checkPwdElmt); ?></td>
+         </tr>
+         <tr>
+            <td colspan="2"> <?php echo $this->formElement($submitElmt) ?> </td>
+        </tr>
+</table>
+    <?php  echo $this->form()->closeTag(); ?>
+

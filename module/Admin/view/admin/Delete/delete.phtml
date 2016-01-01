@@ -1,0 +1,12 @@
+<h1>DeleteController::deleteAction()</h1>
+
+<p>
+    Are you sure that you want to delete
+    '<?php echo $this->escapehtml($this->colis->getRefColis()); ?>'
+</p>
+
+
+<form action="<?php echo $this->url('admin/delete', array(), true) ?>" method="post">
+    <input type="submit" name="delete_confirmation" value="yes">
+    <input type="submit" name="delete_confirmation" value="no">
+</form>

@@ -1,0 +1,351 @@
+
+
+td.details-control {
+    background: url('/images/sfexpress/details_open.png') no-repeat center center;
+    cursor: pointer;	
+}
+
+tr.shown td.details-control {
+    background: url('/images/sfexpress/details_close.png') no-repeat center center;
+}
+
+
+button {
+	width: 50px;
+}
+
+
+input{
+	width: 180px;
+}
+
+input[type="text"]{
+	height: 25px;
+}
+
+input[type="search"]{
+	height: 22px;
+}
+
+select{
+	height: 30px;
+}
+
+
+
+
+
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
+    padding: .4em;
+    text-indent: -9999999px;
+	height: 1.3em;
+	
+}
+    
+table.login, table.login td{
+    border: 0px;
+	width: 250px;
+	height: 55px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	
+}
+
+
+table.login input label{
+	margin-bottom: 0px;
+	height: 50px;
+}
+
+table.login input[type="text"], input[type="password"]{
+	display: inline-block;
+	height: 25px;
+	padding: 4px 6px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	line-height: 25px;
+	color: #555;
+	vertical-align: middle;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px	
+}
+
+span.common-error-msg{
+	position: relative;
+	left: 170px;
+	top: -30px;
+	color: red;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+table#client_colis_date_search, table#client_colis_date_search td, table#client_colis_date_search th{
+	border: 0px solid black;
+	width: 600px;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+} 
+
+
+
+table#client_colis_date_search td span.client_solde{
+	font-size: 20px;
+}
+
+table#client_colis_date_search td span.client_solde_red{
+	color: red;
+	font-size: 20px;
+}
+
+
+
+
+table.user_info, table.user_info td, table.user_info th{
+	border: 1px solid black;
+	width: 300px;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+		
+}
+
+
+
+table.recommand, table.recommand tr, table.recommand td{
+    border: 1px solid black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+table#list_ads,  table#list_ads tr, table#list_ads td{
+    border: 1px solid black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+
+table#add_ads, table#add_ads tr, table#add_ads td{
+    border: 1px solid black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+table#add_ads, table#add_ads tr, table#add_ads td{
+	border: 1px solid black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+table#register_table, table#register_table td{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	height: 30px;
+	width: 250px;
+}
+
+table#register_table input{
+	margin-bottom: 0px;
+}
+
+
+
+input.submit {
+	width: 80px;
+}        
+
+div.commande_title, h1{
+	text-align: center
+}
+
+
+div#client-colis-search{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#admin-colis-search{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+div.client-colis-title{
+	text-align: center;
+}
+
+
+div.commande-colis-search{
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+
+table#articles thead{
+	background: #fff;
+	
+}
+
+
+table#print_table_border, th, td {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+table#all_users, table#all_users th, table#all_users td{
+	border: 1px solid black;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+
+div#error_message{
+	text-align: center;
+	color: red;
+	font-size: 20px;
+}
+
+div#colis-contain {
+/*	position: relative; */
+/* 	margin-left: 300px; */
+/*	top: -250px; */
+}
+
+table#articles, table#articles tr td  {
+	border: 1px solid;
+	width: 600px;
+	text-align: center;
+	
+}
+
+div#colis-contain button#addArticle{
+	width: 130px;	
+	color: black;
+	font-size: 1em;
+	margin-left: 80px;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{
+	float: left;
+	width: 300px;
+	text-align: center;
+	
+}
+.ui-button-text-only .ui-button-text{
+	padding: 0em 0em;
+	 
+}
+
+ui-dialog-buttonset {
+	margin-left: 20px;
+	float: left;
+
+}
+
+form#example-form{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+textarea#exp-adresse, textarea#dest-adresse{
+	display: block;
+	border: 1px solid #ccc; 
+}
+
+
+select#colis-genre, select#depot-mode, select#dest-pay, select#colis-poinds-prevu, select#colis-assurance{
+	display: block;
+	border: 1px solid #ccc; 
+}
+
+
+
+span.colis-total{
+	display: block;
+	border: 0px solid #ccc; 
+	color: blue;
+	font-size: 24px;
+}
+
+a, a:hover, a:active{
+	text-decoration: none;
+}
+
+span.addArticle {
+	background: #2184be;
+	background-image: -webkit-linear-gradient(top, #2184be, #2980b9);
+	background-image: -moz-linear-gradient(top, #2184be, #2980b9);
+	background-image: -ms-linear-gradient(top, #2184be, #2980b9);
+	background-image: -o-linear-gradient(top, #2184be, #2980b9);
+	background-image: linear-gradient(to bottom, #2184be, #2980b9);
+	text-decoration: none;
+	-webkit-border-radius: 11;
+	-moz-border-radius: 11;
+	border-radius: 11px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 12px;
+	padding: 4px 8px 4px 8px;
+}
+
+div#expediteur{
+	margin-left: 10px;
+	
+}
+
+div#cadre_dest {
+	border:2px solid black;
+	margin-left: 10px;
+	margin-right: 30%;
+}
+
+div#dest_contenue{
+	margin-top:10px;
+	margin-left: 20px;
+}
+
+div#sous_ligne{
+	text-decoration:underline
+}
+
+div#separator_adresse{
+	margin-top: 40px;	
+}
+
+div#dest_chinois{
+	border:2px solid black;
+	margin-right: 30%;
+	margin-left: 10px;
+	margin-top: 20px;
+	font-size: x-large;
+	
+}
+

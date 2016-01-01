@@ -38,18 +38,57 @@ class UserService implements UserServiceInterface
         return  $result;
     }
     
-    public function isDuplicateEmail(UserInterface $user)
+    public function findUserByEmail($email)
     {
-    	return $this->userMapper->isDuplicateEmail($user);
+    	return $this->userMapper->findUserByEmail($email);
     }
     
-	public function saveUser(UserInterface $user)
+    
+    public function isAdmin($email)
+    {
+    	return $this->userMapper->isAdmin($email);   
+    }
+    
+    public function isDuplicateEmail($email)
+    {
+    	return $this->userMapper->isDuplicateEmail($email);
+    }
+    
+	public function saveUser($data)
 	{
-		return $this->userMapper->save($user);
+		return $this->userMapper->save($data);
 	} 
 	
 	public function deleteUser(UserInterface $user)
 	{
 		return $this->userMapper->delete($user);
 	}
+	
+	public function findAllAds($id)
+	{
+		return $this->userMapper->findAllAds($id);
+	}
+	
+	public function addAdresse($post)
+	{
+		return $this->userMapper->addAdresse($post);
+	}
+	
+	public function deleteAdresse($colisId, $userId)
+	{
+		return $this->userMapper->deleteAdresse($colisId, $userId);
+	}
+	
+	public function updateUserInfo($data){
+	   return $this->userMapper->updateUserInfo($data);	
+	}
+	
+	public function findAllExpAds($id){
+		return $this->userMapper->findAllExpAds($id);
+	}
+	
+	public function addExpAdresse($post){
+		return $this->userMapper->addExpAdresse($post);
+	}
+	
 }

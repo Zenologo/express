@@ -986,7 +986,7 @@ class Client implements ServerClient
      * @return mixed
      */
     public function _doRequest(Client\Common $client, $request, $location,$action, $version, $oneWay = null)
-    {
+    {      
         // Perform request as is
         if ($oneWay === null) {
             return call_user_func(array($client, 'SoapClient::__doRequest'), $request, $location, $action, $version);
@@ -1108,7 +1108,8 @@ class Client implements ServerClient
 
         $this->lastMethod = $name;
 
-        $soapHeaders = array_merge($this->permanentSoapInputHeaders, $this->soapInputHeaders);
+        $soapHeaders = array_merge($this->permanentSoapInputHeaders, $this->soapInputHeaders);     
+        
         $result = $soapClient->__soapCall(
             $name,
             $this->_preProcessArguments($arguments),
