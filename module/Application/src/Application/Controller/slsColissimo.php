@@ -45,8 +45,8 @@ class slsColissimo{
     private $insurance;
     
     private $PARCEL_LENGTH = 13;
-    private $CONSTRANUM = '823298';
-    private $MOTCLE = 'test123';
+    private $CONSTRANUM = '';
+    private $MOTCLE = '';
     
 
     private $pdfUrl;
